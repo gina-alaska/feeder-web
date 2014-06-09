@@ -40,12 +40,19 @@ Vagrant.configure("2") do |config|
       "feeder-web" => {
         'account' => "vagrant",
         'environment' => "development",
-        'database' => {
-          'hostname' => DEVVM_IP,
-          'database' => 'feeder-web_dev',
-          'username' => 'feeder-web_dev',
-          'password' => 'feeder-web_dev_postgres',
-          'search_path' => 'feeder-web_dev,public'
+        'databases' => {
+          'development' => {
+            'hostname' => DEVVM_IP,
+            'password' => 'feeder-web_dev_postgres',
+          },
+          'test' => {
+            'hostname' => DEVVM_IP,
+            'database' => 'feeder-web_test',
+            'username' => 'feeder-web_test',
+            'password' => 'feeder-web_test_postgres',
+            'search_path' => 'feederweb_test,public',
+            'adapter' => 'postgresql'
+          }
         },
         'paths' => {
           'shared' => "/www/feeder-web/current",

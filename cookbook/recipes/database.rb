@@ -2,19 +2,21 @@ app_name = "feeder-web"
 
 include_recipe 'yum-epel'
 
-node.default['postgresql']['pg_hba'] += [{
-	:type => 'host',
-	:db => node[app_name]['database']['database'],
-	:user => node[app_name]['database']['username'],
-	:addr => 'all',
-	:method => 'trust'
-},{
-  :type => 'host',
-  :db => 'postgres',
-  :user => node[app_name]['database']['username'],
-  :addr => 'all',
-  :method => 'trust'
-}]
+node[app_name]['databases'].each do |environment, database|
+	node.default['postgresql']['pg_hba'] += [{
+		:type => 'host',
+		:db => database['database'],
+		:user => database['username'],
+		:addr => 'all',
+		:method => 'trust'
+	},{
+	  :type => 'host',
+	  :db => 'postgres',
+	  :user => database['username'],
+	  :addr => 'all',
+	  :method => 'trust'
+	}]
+end
 
 include_recipe 'postgresql::server'
 include_recipe 'database::default'
@@ -27,23 +29,25 @@ postgresql_connection_info = {
 	password: node['postgresql']['password']['postgres']
 }
 
-# create a postgresql database
-postgresql_database node[app_name]['database']['database'] do
-  connection postgresql_connection_info
-  action :create
-end
+node[app_name]['databases'].each do |environment, database|
+	# create a postgresql database
+	postgresql_database database['database'] do
+	  connection postgresql_connection_info
+	  action :create
+	end
 
-# Create a postgresql user but grant no privileges
-postgresql_database_user node[app_name]['database']['username'] do
-  connection postgresql_connection_info
-  password   node[app_name]['database']['password']
-  action     :create
-end
+	# Create a postgresql user but grant no privileges
+	postgresql_database_user database['username'] do
+	  connection postgresql_connection_info
+	  password   database['password']
+	  action     :create
+	end
 
-# Grant all privileges on all tables in foo db
-postgresql_database_user node[app_name]['database']['username'] do
-  connection    postgresql_connection_info
-  database_name  node[app_name]['database']['database']
-  privileges    [:all]
-  action        :grant
+	# Grant all privileges on all tables in foo db
+	postgresql_database_user database['username'] do
+	  connection    postgresql_connection_info
+	  database_name database['database']
+	  privileges    [:all]
+	  action        :grant
+	end
 end

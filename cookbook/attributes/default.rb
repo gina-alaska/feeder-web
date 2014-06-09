@@ -17,13 +17,14 @@ default['feeder-web']['paths'] = {
 }
 
 #Rails Database configuration
-default['feeder-web']['database']['adapter']  = "postgresql"
-default['feeder-web']['database']['hostname'] = "localhost"
-default['feeder-web']['database']['database'] = "feeder-web_prod"
-default['feeder-web']['database']['username'] = "feeder-web"
-default['feeder-web']['database']['password'] = "DBPASS"
-default['feeder-web']['database']['search_path'] = "public"
-
+default['feeder-web']['databases']['development'] = {
+  database: 'feeder-web',
+  adapter: 'postgresql',
+  hostname: 'localhost',
+  username: 'feeder-web_dev',
+  password: nil,
+  search_path: 'feederweb,public'
+}
 #Rails configuration
 default['feeder-web']['rails']['secret'] = 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
 default['feeder-web']['rails']['application_class_name'] = ''
