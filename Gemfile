@@ -37,8 +37,9 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'minitest', '~> 5.0', group: :test
 
-
+gem "pg"
 gem "haml"
 gem "bower-tools", github: "gina-alaska/bower-tools"
 gem "omniauth"
@@ -46,3 +47,5 @@ gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
+gem "pry-rails", group: :development
+gem "dragonfly"
