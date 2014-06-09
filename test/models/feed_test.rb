@@ -12,5 +12,8 @@ describe Feed do
     feed.wont_be :valid?
   end
 
+  it('has_many entries') do
+    Feed.reflect_on_association(:entries).macro.must_equal :has_many, "Feed does not have many entries"
+  end
   
 end
