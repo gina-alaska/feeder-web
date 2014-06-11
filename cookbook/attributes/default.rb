@@ -2,7 +2,8 @@ default['unicorn_config_path'] = '/etc/unicorn'
 
 default['feeder-web']['account'] = "webdev"
 default['feeder-web']['environment'] = "production"
-default['feeder-web']['packages'] = Mash.new
+default['feeder-web']['packages'] = {
+}
 
 
 
@@ -41,6 +42,7 @@ default['feeder-web']['unicorn'] = {
   pid:         '/www/feeder-web/shared/tmp/pids/unicorn.pid',
   stdout_path: '/www/feeder-web/shared/log/unicorn.stdout.log',
   stderr_path: '/www/feeder-web/shared/log/unicorn.stderr.log',
+  worker_timeout: 60,
   working_directory: '/www/feeder-web/current',
   before_fork: '
 defined?(ActiveRecord::Base) and

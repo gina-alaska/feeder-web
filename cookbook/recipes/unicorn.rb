@@ -13,8 +13,8 @@ unicorn_config node[app_name]['unicorn']['config_path'] do
   preload false
   listen "#{node[app_name]['unicorn']['listen']}/#{app_name}.socket" => {backlog: 1024}
   pid node[app_name]['unicorn']['pid']
-  stderr_path node[app_name]['unicorn']['stderr']
-  stdout_path node[app_name]['unicorn']['stdout']
+  stderr_path node[app_name]['unicorn']['stderr_path']
+  stdout_path node[app_name]['unicorn']['stdout_path']
   worker_timeout node[app_name]['unicorn']['worker_timeout']
   worker_processes [node['cpu']['total'].to_i * 4, 8].min
   working_directory node[app_name]['unicorn']['deploy_path']
@@ -30,7 +30,8 @@ template "/etc/init.d/unicorn_#{app_name}" do
     install_path: node[app_name]['paths']['deploy'],
     user: node[app_name]['account'],
     unicorn_config_file: node[app_name]['unicorn']['config_path'],
-    environment: node[app_name]['environment']
+    environment: node[app_name]['environment'],
+    ruby_version: node[app_name]['ruby_version']
   })
 end
 

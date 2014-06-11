@@ -31,12 +31,6 @@ Vagrant.configure("2") do |config|
       'chruby' => {
         'default' => 'embedded'
       },
-      'unicorn' => {
-        'listen' => '/var/run/unicorn/',
-        'pid' => '/www/feeder-web/current/tmp/pids/unicorn_feeder-web.pid',
-        'stderr_path' => '/www/feeder-web/current/log/unicorn.stderr.log',
-        'stdout_path' => '/www/feeder-web/current/log/unicorn.stdout.log'
-      },
       "feeder-web" => {
         'account' => "vagrant",
         'environment' => "development",
@@ -63,7 +57,14 @@ Vagrant.configure("2") do |config|
           'cms' => "www/feeder-web/current/public/cms",
           'repos' => "www/feeder-web/current/repos"
         },
-        'database_setup' => true
+        'unicorn' => {
+          'listen' => '/var/run/unicorn/',
+          'pid' => '/www/feeder-web/current/tmp/pids/unicorn_feeder-web.pid',
+          'stderr_path' => '/www/feeder-web/current/log/unicorn.stderr.log',
+          'stdout_path' => '/www/feeder-web/current/log/unicorn.stdout.log'
+        },
+        'database_setup' => true,
+        'ruby_version' => '1.9.3'
       },
       'postgresql' => {
         'password' => {
