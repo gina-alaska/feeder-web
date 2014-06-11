@@ -15,3 +15,9 @@
 /log/*.log
 /tmp
 /config/database.yml
+
+# Ignore Node modules
+/node_modules
+
+# Ignore Dragonfly
+/public/system/dragonfly
