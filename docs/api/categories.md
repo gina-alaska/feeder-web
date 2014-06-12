@@ -2,10 +2,7 @@
 
 1. Get a category
 
-
-
 ## Get a category
-
 
 ```
 GET /categories
@@ -14,7 +11,7 @@ GET /categories
 #### Parameters
 | Name | Type | Description |
 | ---- |:----:| ----------- |
-| online | boolean | Only show feeds that are online, default: true |
+| online | boolean | Only show feeds that are online, default: false |
 | mobile | boolean | Only show feeds that are mobile compatible, default: false |
 
 #### Response
