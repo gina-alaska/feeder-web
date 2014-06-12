@@ -1,14 +1,14 @@
 # Categories
 
-1. Get a catagory
+1. Get a category
 
 
 
-## Get a catagory
+## Get a category
 
 
 ```
-GET /catagories
+GET /categories
 ```
 
 #### Parameters
