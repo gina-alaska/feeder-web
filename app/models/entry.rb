@@ -1,4 +1,5 @@
 class Entry < ActiveRecord::Base
+  include RouteHelpers
   extend FriendlyId
   friendly_id :title, use: :slugged
 
