@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'minitest/spec'
 
 class ActiveSupport::TestCase
+
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
