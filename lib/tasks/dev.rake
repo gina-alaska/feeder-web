@@ -30,7 +30,9 @@ namespace :dev do
           e = Entry.new(
             feed: f,
             source_url: entry['image'],
-            image_url: entry['image']
+            image_url: entry['image'],
+            title: entry['title'],
+            event_at: entry['event_at']
           )
           e.save
         end
