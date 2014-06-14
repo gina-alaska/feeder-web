@@ -3,6 +3,9 @@ class Entry < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  has_many :stars
+  has_many :users, through: :stars
+
   belongs_to :feed
 
   extend Dragonfly::Model
