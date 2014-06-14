@@ -22,4 +22,10 @@ describe Entry do
     e.macro.must_equal :has_many, "Entry does not have many users"
     e.options[:through].must_equal :stars, "Entry does not have many users through stars"
   end
+
+  #TODO: This is a bad name
+  it('can be starred by users') do
+    entry.starred?(users(:one)).must_equal true, "Entry should be starred by user"
+    entry.starred?(User.new).must_equal false, "Entry should not be starred by user"
+  end
 end

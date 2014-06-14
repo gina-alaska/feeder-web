@@ -21,4 +21,7 @@ class Entry < ActiveRecord::Base
   end
   dragonfly_accessor :preview
 
+  def starred?(user)
+    self.stars.where(user: user).any?
+  end
 end
