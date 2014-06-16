@@ -20,8 +20,9 @@ GET /categories
 [
   {
     "id": 123456,
-    "name": "Feed Name",
-    "slug": "feed-name",
+    "name": "Category Name",
+    "slug": "category-name",
+    "url": "http://feeder.gina.alaska.edu/categories/category-name",
     "feeds": [
       {
         "id": 123456789,
@@ -30,6 +31,7 @@ GET /categories
         "description": "Long description of feed",
         "updated_at": "2014-01-01T12:34:01Z",
         "mobile_compatible": true,
+        "url": "http://feeder.gina.alaska.edu/feeds/example-feed",
         "online": true,
         "category": "image",
         "preview_url": "http://feeder.gina.alaska.edu/feeds/example-feed/preview.jpg",
