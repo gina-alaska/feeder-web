@@ -17,6 +17,6 @@ class Feed < ActiveRecord::Base
 
 
   def online?
-    self.status == 'online' ? true : false
+    self.status == 'online'
   end
 end
