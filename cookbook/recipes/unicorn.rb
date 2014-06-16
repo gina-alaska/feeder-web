@@ -8,6 +8,9 @@ directory node[app_name]['unicorn']['listen'] do
   action :create
 end
 
+workers = node[app_name]['unicorn']['worker_processes'] ||
+          [node['cpu']['total'].to_i * 4, 8].min
+
 unicorn_config node[app_name]['unicorn']['config_path'] do
   # preload_app node[app_name]['unicorn']['preload_app']
   preload false
@@ -16,7 +19,7 @@ unicorn_config node[app_name]['unicorn']['config_path'] do
   stderr_path node[app_name]['unicorn']['stderr_path']
   stdout_path node[app_name]['unicorn']['stdout_path']
   worker_timeout node[app_name]['unicorn']['worker_timeout']
-  worker_processes [node['cpu']['total'].to_i * 4, 8].min
+  worker_processes workers
   working_directory node[app_name]['unicorn']['deploy_path']
   before_fork node[app_name]['unicorn']['before_fork']
   after_fork node[app_name]['unicorn']['after_fork']

@@ -1,4 +1,13 @@
 class Entry < ActiveRecord::Base
+  include RouteHelpers
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
+  validates :source_url, :format => URI::regexp(%w(http https))
+
+  has_many :stars
+  has_many :users, through: :stars
+
   belongs_to :feed
 
   extend Dragonfly::Model
@@ -14,4 +23,7 @@ class Entry < ActiveRecord::Base
   end
   dragonfly_accessor :preview
 
+  def starred?(user)
+    self.stars.where(user: user).any?
+  end
 end

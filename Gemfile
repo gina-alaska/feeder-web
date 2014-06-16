@@ -35,7 +35,9 @@ gem 'unicorn'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'minitest', '~> 5.0', group: :test
+group :test do
+  gem 'minitest', '~> 5.0'
+end
 
 gem "pg"
 gem "haml"
@@ -47,3 +49,4 @@ gem "omniauth-openid"
 gem "google-api-client"
 gem "pry-rails", group: :development
 gem "dragonfly"
+gem "friendly_id"

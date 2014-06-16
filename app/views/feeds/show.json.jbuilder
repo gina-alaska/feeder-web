@@ -1,1 +1,1 @@
-json.extract! @feed, :id, :created_at, :updated_at
+json.partial! 'feeds/feed', feed: @feed

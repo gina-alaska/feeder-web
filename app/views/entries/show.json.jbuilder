@@ -1,1 +1,1 @@
-json.extract! @entry, :id, :created_at, :updated_at
+json.partial! 'entries/entry', entry: @entry

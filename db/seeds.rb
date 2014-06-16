@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+%w{image movie}.each do |category|
+  c = Category.where(name: category.humanize).first_or_initialize
+  c.save if c.new_record?
+end

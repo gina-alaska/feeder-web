@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy, :more_info]
 
   # GET /feeds
   # GET /feeds.json
@@ -61,10 +61,16 @@ class FeedsController < ApplicationController
     end
   end
 
+  def more_info
+    unless @feed.more_info_url.nil?
+      redirect_to @feed.more_info.url
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feed
-      @feed = Feed.find(params[:id])
+      @feed = Feed.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

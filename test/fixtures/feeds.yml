@@ -1,19 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  slug:
   title: Feed1
   description: Some Feed
   author: MyString
-  status: MyString
+  status: 'online'
   author: MyString
   location: MyString
 
 two:
-  slug:
   title: Feed2
   description: MyText
   author: MyString
-  status: MyString
+  status: 'not online'
   author: MyString
   location: MyString
