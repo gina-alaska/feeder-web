@@ -3,6 +3,8 @@ class Entry < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  validates :source_url, :format => URI::regexp(%w(http https))
+
   has_many :stars
   has_many :users, through: :stars
 

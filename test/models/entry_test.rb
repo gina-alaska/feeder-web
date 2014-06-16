@@ -23,6 +23,11 @@ describe Entry do
     e.options[:through].must_equal :stars, "Entry does not have many users through stars"
   end
 
+  it('has a source_url') do
+    entry.source_url = nil
+    entry.valid?.must_equal false
+  end
+
   #TODO: This is a bad name
   it('can be starred by users') do
     entry.starred?(users(:one)).must_equal true, "Entry should be starred by user"
