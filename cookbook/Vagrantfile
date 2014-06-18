@@ -64,6 +64,9 @@ Vagrant.configure("2") do |config|
           'stdout_path' => '/www/feeder-web/current/log/unicorn.stdout.log',
           'worker_processes' => 2
         },
+        'sidekiq' => {
+          'action' => [:enable, :start]
+        },
         'database_setup' => true,
         'ruby_version' => '1.9.3'
       },

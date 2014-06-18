@@ -2,10 +2,9 @@ default['unicorn_config_path'] = '/etc/unicorn'
 
 default['feeder-web']['account'] = "webdev"
 default['feeder-web']['environment'] = "production"
-default['feeder-web']['packages'] = {
+default['feeder-web']['packages'] = %w{
+  ImageMagick-devel
 }
-
-
 
 #Path configuration
 default['feeder-web']['paths'] = {
@@ -64,6 +63,9 @@ defined?(ActiveRecord::Base) and
   ActiveRecord::Base.establish_connection
   '
 }
+
+#Sidekiq Configuration
+default['feeder-web']['sidekiq']['action'] = [:enable]
 
 #Database configuration
 override['postgresql']['enable_pgdg_yum'] = true

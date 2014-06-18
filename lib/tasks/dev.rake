@@ -43,12 +43,23 @@ namespace :dev do
 
   # namespace :entries do
   #   desc "Fetch the latest N entries for feeds"
-  #   task :seed, [:count] => :environment do
-  #     count = args['count'] || 5
-  #
+  #   task :seed => :environment do
   #     Feed.all.each do |feed|
-  #
-  #
+  #       feed.
+  #       entries_url = URI.parse(feed['entries'])
+  #       entries = JSON.parse(Net::HTTP.get_response(entries_url).body)
+  #       entries.each do |entry|
+  #         e = Entry.new(
+  #           feed: f,
+  #           source_url: entry['image'],
+  #           title: entry['title'],
+  #           event_at: entry['event_at']
+  #         )
+  #         if e.save
+  #           FetchEntryWorker.perform_async(e.id)
+  #         end
+  #       end
+  #     end
   #   end
   # end
 end

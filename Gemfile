@@ -52,3 +52,4 @@ gem "dragonfly"
 gem "friendly_id"
 gem "sidekiq"
 gem "aasm"
+gem 'sinatra', require: false
