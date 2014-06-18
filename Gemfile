@@ -50,3 +50,5 @@ gem "google-api-client"
 gem "pry-rails", group: :development
 gem "dragonfly"
 gem "friendly_id"
+gem "sidekiq"
+gem "aasm"
