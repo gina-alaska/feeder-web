@@ -21,7 +21,7 @@
 prog=sidekiq
 RAILS_ROOT="<%= @install_path %>"
 lockfile=${LOCKFILE-/var/lock/subsys/sidekiq}
-pidfile=$RAILS_ROOT/tmp/pids/sidekiq.pid
+pidfile=$RAILS_ROOT/<%=@pidfile%>
 logfile=$RAILS_ROOT/log/sidekiq.log
 SLEEPMSEC=100000
 RETVAL=0

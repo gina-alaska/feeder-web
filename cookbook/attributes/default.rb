@@ -14,6 +14,7 @@ default['feeder-web']['paths'] = {
   config:        '/www/feeder-web/shared/config',
   initializers:  '/www/feeder-web/shared/config/initializers',
   public:        '/www/feeder-web/shared/public',
+  system:        '/www/feeder-web/shared/public/system'
 }
 
 #Rails Database configuration
@@ -66,6 +67,28 @@ defined?(ActiveRecord::Base) and
 
 #Sidekiq Configuration
 default['feeder-web']['sidekiq']['action'] = [:enable]
+default['feeder-web']['sidekiq']['pidfile'] = 'tmp/pids/sidekiq.pid'
+default['feeder-web']['sidekiq']['concurrency'] = 1
+default['feeder-web']['sidekiq']['environments'] = {
+  'development' => {
+    'concurrency' => 2
+  }
+}
+
+#Mounts
+default['feeder-web']['mounts'] = {
+  'gvolfeeder_web_dev' => {
+    'device' => 'pod2.gina.alaska.edu:/gvolfeeder_web_dev',
+    'fstype' => 'glusterfs',
+    'mount_point' => '/gluster/gvolfeeder_web_dev',
+    'action' => [:mount, :enable]
+  }
+}
+
+#Links
+default['feeder-web']['links'] = {
+  'dragonfly' => {'name' => '/www/feeder-web/shared/public/system/dragonfly', 'to' => '/gluster/gvolfeeder_web_dev/'}
+}
 
 #Database configuration
 override['postgresql']['enable_pgdg_yum'] = true
