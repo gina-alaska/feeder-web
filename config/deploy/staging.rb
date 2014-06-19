@@ -5,9 +5,9 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 set :user, 'webdev'
 
-chef_role :app, 'roles:watch-app', {}
-chef_role :web, 'roles:watch-app', {}
-chef_role :db, 'roles:watch-app', {}
+chef_role :app, 'roles:feeder-web-dev', {}
+chef_role :web, 'roles:feeder-web-dev', {}
+chef_role :db, 'roles:feeder-web-dev', {}
 
 # Extended Server Syntax
 # ======================
