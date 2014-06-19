@@ -50,6 +50,16 @@ template "#{node[app_name]['paths']['shared']}/config/database.yml" do
   })
 end
 
+template "#{node[app_name]['paths']['shared']}/config/secrets.yml" do
+  owner account
+  group account
+  mode 00644
+  variables({
+    environment: node[app_name]['environment'],
+    secrets: node[app_name]['secrets']
+  })
+end
+
 directory "/home/#{account}/.bundle" do
   owner account
   group account

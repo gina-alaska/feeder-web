@@ -26,8 +26,9 @@ default['feeder-web']['databases']['development'] = {
   password: nil,
   search_path: 'feederweb,public'
 }
+
 #Rails configuration
-default['feeder-web']['rails']['secret'] = 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
+default['feeder-web']['secrets']['secret_key_base'] = 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
 default['feeder-web']['rails']['application_class_name'] = ''
 # default['feeder-web']['rails']['google_key'] = ""
 # default['feeder-web']['rails']['google_secret'] = ""
