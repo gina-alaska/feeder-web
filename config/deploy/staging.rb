@@ -9,6 +9,7 @@ chef_role :app, 'roles:feeder-web-dev', {}
 chef_role :web, 'roles:feeder-web-dev', {}
 chef_role :db, 'roles:feeder-web-dev', {}
 
+set :rails_env, :production
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the
