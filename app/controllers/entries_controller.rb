@@ -33,7 +33,7 @@ class EntriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
       {
-        feed_id: params[:entry][:feed_id],
+        feed: Feed.friendly.find(params[:feed_id]),
         source_url: params[:payload][:data_url],
         event_at: params[:payload][:event_date]
         # title: params[:entry][:event_date]
