@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'feeder-web'
-set :repo_url, 'git@github.com:/gina-alaska/feeder-web.git'
+set :repo_url, 'git@github.com:gina-alaska/feeder-web.git'
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :deploy_to, '/www/feeder-web'
