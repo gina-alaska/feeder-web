@@ -13,10 +13,10 @@ class Entry < ActiveRecord::Base
 
   aasm do
     state :waiting, :initial => true
-    state :finished
+    state :available
 
     event :finish do
-      transitions :from => :waiting, :to => :finished
+      transitions :from => :waiting, :to => :available
     end
   end
 
