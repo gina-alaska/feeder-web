@@ -50,3 +50,11 @@ gem "google-api-client"
 gem "pry-rails", group: :development
 gem "dragonfly"
 gem "friendly_id"
+gem "sidekiq"
+gem "aasm"
+gem 'sinatra', require: false
+gem 'capistrano', '~> 3.0'
+gem 'capistrano-chruby'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-chef'

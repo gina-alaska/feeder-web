@@ -1,14 +1,25 @@
 class Entry < ActiveRecord::Base
+  include AASM
   include RouteHelpers
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  validates :source_url, :format => URI::regexp(%w(http https))
+  validates :source_url, :format => URI::regexp(%w(http https)), uniqueness: true
 
   has_many :stars
   has_many :users, through: :stars
 
   belongs_to :feed
+
+  aasm do
+    state :waiting, :initial => true
+    state :available
+
+    event :finish do
+      transitions :from => :waiting, :to => :available
+    end
+  end
+
 
   extend Dragonfly::Model
   dragonfly_accessor :image do

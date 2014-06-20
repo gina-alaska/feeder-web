@@ -17,5 +17,10 @@ Rails.application.routes.draw do
     resources :entries
   end
 
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   root to: 'feeds#index'
 end

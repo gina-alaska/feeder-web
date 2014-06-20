@@ -27,14 +27,26 @@ namespace :dev do
         entries_url = URI.parse(feed['entries'])
         entries = JSON.parse(Net::HTTP.get_response(entries_url).body)
         entries.each do |entry|
-          e = Entry.new(
-            feed: f,
-            source_url: entry['image'],
-            image_url: entry['image'],
-            title: entry['title'],
-            event_at: entry['event_at']
-          )
-          e.save
+          # e = Entry.new(
+          #   feed: f,
+          #   source_url: entry['image'],
+          #   title: entry['title'],
+          #   event_at: entry['event_at']
+          # )
+          # if e.save
+          #   FetchEntryWorker.perform_async(e.id)
+          #Create an entry payload
+          entry_hash = {
+            'version' => '0.0.1-fake',
+            'type' => 'create',
+            'payload[data_url]' => entry['image'],
+            'payload[event_date]' => entry['event_at'],
+            #These two are incorrect, but aren't used.
+            # Included for completeness
+            'payload[event_url]' => entries_url.to_s,
+            'payload[feed_url]' => feeder.to_s
+          }
+          Net::HTTP.post_form(URI.parse("http://192.168.0.57/feeds/#{f.slug}/entries.json"), entry_hash)
         end
       end
     end
@@ -42,12 +54,23 @@ namespace :dev do
 
   # namespace :entries do
   #   desc "Fetch the latest N entries for feeds"
-  #   task :seed, [:count] => :environment do
-  #     count = args['count'] || 5
-  #
+  #   task :seed => :environment do
   #     Feed.all.each do |feed|
-  #
-  #
+  #       feed.
+  #       entries_url = URI.parse(feed['entries'])
+  #       entries = JSON.parse(Net::HTTP.get_response(entries_url).body)
+  #       entries.each do |entry|
+  #         e = Entry.new(
+  #           feed: f,
+  #           source_url: entry['image'],
+  #           title: entry['title'],
+  #           event_at: entry['event_at']
+  #         )
+  #         if e.save
+  #           FetchEntryWorker.perform_async(e.id)
+  #         end
+  #       end
+  #     end
   #   end
   # end
 end

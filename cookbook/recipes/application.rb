@@ -17,12 +17,46 @@ node[app_name]['paths'].each do |name, path|
   end
 end
 
+include_recipe "gina-gluster::client"
+
+node[app_name]['mounts'].each do |name, mnt|
+  directory mnt['mount_point'] do
+    recursive true
+  end
+  mount mnt['mount_point'] do
+    device mnt['device']
+    fstype mnt['fstype'] if mnt['fstype']
+    options mnt['options'] if mnt['options']
+    action mnt['action']
+  end
+end
+
+node[app_name]['links'].each do |name, lnk|
+  link lnk['name'] do
+    to lnk['to']
+    owner account
+    group account
+    action lnk['action']
+  end
+end
+
+
 template "#{node[app_name]['paths']['shared']}/config/database.yml" do
   owner account
   group account
   mode 00644
   variables({
     databases: node[app_name]['databases']
+  })
+end
+
+template "#{node[app_name]['paths']['shared']}/config/secrets.yml" do
+  owner account
+  group account
+  mode 00644
+  variables({
+    environment: node[app_name]['environment'],
+    secrets: node[app_name]['secrets']
   })
 end
 

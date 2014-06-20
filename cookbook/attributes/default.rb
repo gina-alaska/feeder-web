@@ -2,10 +2,9 @@ default['unicorn_config_path'] = '/etc/unicorn'
 
 default['feeder-web']['account'] = "webdev"
 default['feeder-web']['environment'] = "production"
-default['feeder-web']['packages'] = {
+default['feeder-web']['packages'] = %w{
+  ImageMagick-devel
 }
-
-
 
 #Path configuration
 default['feeder-web']['paths'] = {
@@ -15,6 +14,7 @@ default['feeder-web']['paths'] = {
   config:        '/www/feeder-web/shared/config',
   initializers:  '/www/feeder-web/shared/config/initializers',
   public:        '/www/feeder-web/shared/public',
+  system:        '/www/feeder-web/shared/public/system'
 }
 
 #Rails Database configuration
@@ -26,8 +26,9 @@ default['feeder-web']['databases']['development'] = {
   password: nil,
   search_path: 'feederweb,public'
 }
+
 #Rails configuration
-default['feeder-web']['rails']['secret'] = 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
+default['feeder-web']['secrets']['secret_key_base'] = 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
 default['feeder-web']['rails']['application_class_name'] = ''
 # default['feeder-web']['rails']['google_key'] = ""
 # default['feeder-web']['rails']['google_secret'] = ""
@@ -63,6 +64,31 @@ sleep 1
 defined?(ActiveRecord::Base) and
   ActiveRecord::Base.establish_connection
   '
+}
+
+#Sidekiq Configuration
+default['feeder-web']['sidekiq']['action'] = [:enable]
+default['feeder-web']['sidekiq']['pidfile'] = 'tmp/pids/sidekiq.pid'
+default['feeder-web']['sidekiq']['concurrency'] = 1
+default['feeder-web']['sidekiq']['environments'] = {
+  'development' => {
+    'concurrency' => 2
+  }
+}
+
+#Mounts
+default['feeder-web']['mounts'] = {
+  'gvolfeeder_web_dev' => {
+    'device' => 'pod2.gina.alaska.edu:/gvolfeeder_web_dev',
+    'fstype' => 'glusterfs',
+    'mount_point' => '/gluster/gvolfeeder_web_dev',
+    'action' => [:mount, :enable]
+  }
+}
+
+#Links
+default['feeder-web']['links'] = {
+  'dragonfly' => {'name' => '/www/feeder-web/shared/public/system/dragonfly', 'to' => '/gluster/gvolfeeder_web_dev/'}
 }
 
 #Database configuration
