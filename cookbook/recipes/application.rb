@@ -60,6 +60,15 @@ template "#{node[app_name]['paths']['shared']}/config/secrets.yml" do
   })
 end
 
+template "#{node[app_name]['paths']['shared']}/config/default_url.yml" do
+  owner account
+  group account
+  mode 00644
+  variables({
+    environments: node[app_name]['rails']['default_urls']
+  })
+end
+
 directory "/home/#{account}/.bundle" do
   owner account
   group account
