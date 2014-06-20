@@ -1,11 +1,12 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show]
+  before_action :set_feed
   skip_before_action :verify_authenticity_token, only: [:create]
 
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.available.all
+    @entries = @feed.entries.available.all
   end
 
   # GET /entries/1
@@ -28,6 +29,10 @@ class EntriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
       @entry = Entry.friendly.find(params[:id])
+    end
+
+    def set_feed
+      @feed = Feed.friendly.find(params[:feed_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
