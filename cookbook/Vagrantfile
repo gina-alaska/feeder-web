@@ -77,6 +77,12 @@ Vagrant.configure("2") do |config|
             'action' => :nothing
           }
         },
+        'rails' => {
+          'default_urls' => {
+            'development' => DEVVM_IP,
+            'test' => DEVVM_IP
+          }
+        },
         'database_setup' => true,
         'ruby_version' => '1.9.3'
       },

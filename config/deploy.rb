@@ -10,7 +10,7 @@ set :scm, :git
 set :format, :pretty
 set :log_level, :debug
 # set :pty, true
-set :linked_files, %w{config/database.yml config/secrets.yml config/sidekiq.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml config/sidekiq.yml config/default_url.yml}
 set :linked_dirs, %w{bin log tmp vendor/bundle public/system}
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

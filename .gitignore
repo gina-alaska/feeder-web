@@ -21,3 +21,5 @@
 
 # Ignore Dragonfly
 /public/system/dragonfly
+
+config/default_url.yml
