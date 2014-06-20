@@ -30,7 +30,7 @@ class Entry < ActiveRecord::Base
         i.encode(:jpg)
       end
     end
-    copy_to(:preview){|i| i.thumb('200x200')}
+    copy_to(:preview){|i| i.thumb('5000x5000>')}
   end
   dragonfly_accessor :preview
 
