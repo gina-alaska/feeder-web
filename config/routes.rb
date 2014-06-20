@@ -17,6 +17,24 @@ Rails.application.routes.draw do
     resources :entries
   end
 
+  get '/preview/*id(.:format)' => Dragonfly.app.endpoint { |params, app|
+    image = Entry.where('preview_uid LIKE ?', "#{params[:id]}%").first.preview
+    format = params[:format] || 'jpg'
+    size = params[:size] || '500x500'
+
+    begin
+      unless image.image?
+        image = app.fetch_file(Rails.root.join("app/assets/images/missing.jpg"))
+      end
+    rescue
+      image = app.fetch_file(Rails.root.join("app/assets/images/missing.jpg"))
+    end
+
+    image = image.thumb(size)
+    image = image.encode(format) if image.format.to_s != format
+    image
+  }, as: :entry_preview
+
   if Rails.env.development?
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
