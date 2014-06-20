@@ -25,7 +25,8 @@ template "/etc/nginx/sites-available/#{app_name}_site" do
     socket: "#{node[app_name]['unicorn']['listen']}/#{app_name}.socket",
     name: app_name,
     user: node[app_name]['account'],
-    proxies: proxies
+    proxies: proxies,
+    environment: node[app_name]['environment']
   })
 end
 
