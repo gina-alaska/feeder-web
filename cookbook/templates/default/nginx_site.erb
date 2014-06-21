@@ -24,7 +24,7 @@ server {
   }
 
 <% if @environment == 'production' %>
-  location ~ ^/(assets)/ {
+  location ~ ^/(assets|system)/ {
         root <%= @install_path %>/public;
         gzip_static on;
         expires max;

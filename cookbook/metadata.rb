@@ -4,7 +4,7 @@ maintainer_email 'support+chef@gina.alaska.edu'
 license          'Apache 2.0'
 description      'Installs/Configures feeder-web'
 long_description 'Installs/Configures feeder-web'
-version          '0.5.0'
+version          '0.6.2'
 
 supports "centos", ">= 6.0"
 

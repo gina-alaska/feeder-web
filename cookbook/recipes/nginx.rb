@@ -20,12 +20,13 @@ end
 template "/etc/nginx/sites-available/#{app_name}_site" do
   source 'nginx_site.erb'
   variables({
-    install_path: node[app_name]['deploy_path'],
-    shared_path: node[app_name]['shared_path'],
+    install_path: node[app_name]['paths']['deploy'],
+    shared_path: node[app_name]['paths']['shared'],
     socket: "#{node[app_name]['unicorn']['listen']}/#{app_name}.socket",
     name: app_name,
     user: node[app_name]['account'],
-    proxies: proxies
+    proxies: proxies,
+    environment: node[app_name]['environment']
   })
 end
 
