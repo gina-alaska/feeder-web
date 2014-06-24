@@ -11,10 +11,8 @@ class Feed < ActiveRecord::Base
   belongs_to :category
 
   def preview
-    entries.order(event_at: :desc).first
+    entries.order(uid: :desc).first
   end
-
-
 
   def online?
     self.status == 'online'

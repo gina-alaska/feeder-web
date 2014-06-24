@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = @feed.entries.available.all
+    @entries = @feed.entries.available.order(uid: :desc).all
   end
 
   # GET /entries/1
