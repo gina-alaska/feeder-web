@@ -3,6 +3,7 @@ class EntriesController < ApplicationController
 
   before_action :set_entry, only: [:show]
   before_action :set_feed
+  after_action :set_page_headers, only: [:index]
   skip_before_action :verify_authenticity_token, only: [:create]
 
   # GET /entries
@@ -51,4 +52,11 @@ class EntriesController < ApplicationController
     def entries_limit
       [MAX_ENTRIES, (params[:count] || 10).to_i].min
     end
+
+    def set_page_headers
+      # response.headers['feeder-next-page'] = feed_entries_url(@feed, max_id: @entries, count: entries_limit)
+      # To get the next page: @feed.entries.available.order(uid: :asc).limit(entries_limit).where('uid > ?' params[:max_id]).last
+      response.headers['feeder-prev-page'] = feed_entries_url(@feed, max_id: @entries.last.uid-1, count: entries_limit)
+    end
+
 end
