@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20140624010051) do
     t.string   "source_url"
     t.string   "slug"
     t.string   "aasm_state"
-    t.string   "uid_str"
     t.integer  "uid",          limit: 8
   end
 
