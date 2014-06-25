@@ -55,9 +55,7 @@ class EntriesController < ApplicationController
     end
 
     def set_page_headers
-      # response.headers['feeder-next-page'] = feed_entries_url(@feed, max_id: @entries, count: entries_limit)
-      # To get the next page: @feed.entries.available.order(uid: :asc).limit(entries_limit).where('uid > ?' params[:max_id]).last
-      response.headers['feeder-prev-page'] = feed_entries_url(@feed, max_id: @entries.last.uid-1, count: entries_limit)
+      response.headers['X-Previous-Entries'] = feed_entries_url(@feed, max_id: @entries.last.uid, count: entries_limit)
     end
 
 end
