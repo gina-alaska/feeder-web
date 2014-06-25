@@ -11,6 +11,7 @@ class EntriesController < ApplicationController
   def index
     @entries = @feed.entries.available.order(uid: :desc).limit(entries_limit)
     @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
+    @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?
   end
 
   # GET /entries/1
