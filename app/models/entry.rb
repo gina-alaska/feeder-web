@@ -5,6 +5,8 @@ class Entry < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   validates :source_url, :format => URI::regexp(%w(http https)), uniqueness: true
+  validates :event_at, presence: true
+  validates :uid, presence: true, uniqueness: true, allow_blank: true
 
   has_many :stars
   has_many :users, through: :stars
@@ -15,11 +17,10 @@ class Entry < ActiveRecord::Base
     state :waiting, :initial => true
     state :available
 
-    event :finish do
+    event :finish, before: :generate_uid do
       transitions :from => :waiting, :to => :available
     end
   end
-
 
   extend Dragonfly::Model
   dragonfly_accessor :image do
@@ -36,5 +37,10 @@ class Entry < ActiveRecord::Base
 
   def starred?(user)
     self.stars.where(user: user).any?
+  end
+
+  private
+  def generate_uid
+    self.uid = "#{event_at.to_i}#{id % 1000}".to_i if uid.nil?
   end
 end

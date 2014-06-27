@@ -1,12 +1,17 @@
 class EntriesController < ApplicationController
+  MAX_ENTRIES = 100
+
   before_action :set_entry, only: [:show]
   before_action :set_feed
+  after_action :set_page_headers, only: [:index]
   skip_before_action :verify_authenticity_token, only: [:create]
 
   # GET /entries
   # GET /entries.json
   def index
-    @entries = @feed.entries.available.all
+    @entries = @feed.entries.available.order(uid: :desc).limit(entries_limit)
+    @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
+    @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?
   end
 
   # GET /entries/1
@@ -44,4 +49,13 @@ class EntriesController < ApplicationController
         # title: params[:entry][:event_date]
       }
     end
+
+    def entries_limit
+      [MAX_ENTRIES, (params[:count] || 10).to_i].min
+    end
+
+    def set_page_headers
+      response.headers['X-Previous-Entries'] = feed_entries_url(@feed, max_id: @entries.last.uid, count: entries_limit)
+    end
+
 end

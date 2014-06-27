@@ -28,6 +28,12 @@ describe Entry do
     entry.valid?.must_equal false
   end
 
+  it('has an event_at date') do
+    entry.event_at = nil
+    entry.valid?.must_equal false
+    #entry.errors[:event_at].must_contain "must be present"
+  end
+
   #TODO: This is a bad name
   it('can be starred by users') do
     entry.starred?(users(:one)).must_equal true, "Entry should be starred by user"
