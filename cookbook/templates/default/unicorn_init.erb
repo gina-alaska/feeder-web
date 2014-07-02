@@ -22,7 +22,6 @@ prog=unicorn
 #ruby_home=/opt/ruby-enterprise-1.8.7-2012.02
 RAILS_ROOT="<%= @install_path %>"
 UNICORN_CONF="<%= @unicorn_config_file %>"
-
 lockfile=${LOCKFILE-/var/lock/subsys/unicorn}
 pidfile=$RAILS_ROOT/tmp/pids/unicorn.pid
 SLEEPMSEC=100000
@@ -32,7 +31,6 @@ ENV=<%=@environment%>
 start() {
     echo -n $"Starting $prog: "
     cd $RAILS_ROOT
-#    $ruby_home/bin/unicorn_rails -c $UNICORN_CONF -E production -D --path /redmine
     su - <%=@user %> -c "cd $RAILS_ROOT && chruby-exec <%=@ruby_version %> -- bundle exec unicorn_rails -c $UNICORN_CONF -E $ENV -D "
     RETVAL=$?
     echo

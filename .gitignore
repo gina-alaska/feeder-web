@@ -23,3 +23,4 @@
 /public/system/dragonfly
 
 config/default_url.yml
+config/initializers/sidekiq.rb

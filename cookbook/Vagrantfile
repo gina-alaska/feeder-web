@@ -51,11 +51,7 @@ Vagrant.configure("2") do |config|
         'paths' => {
           'shared' => "/www/feeder-web/current",
           'config' => "/www/feeder-web/current/config",
-          'initializers' => "/www/feeder-web/current/config/initializers",
-          'archive' => "/www/feeder-web/current/archive",
-          'uploads' => "/www/feeder-web/current/uploads",
-          'cms' => "www/feeder-web/current/public/cms",
-          'repos' => "www/feeder-web/current/repos"
+          'initializers' => "/www/feeder-web/current/config/initializers"
         },
         'unicorn' => {
           'listen' => '/var/run/unicorn/',
@@ -82,6 +78,10 @@ Vagrant.configure("2") do |config|
             'development' => DEVVM_IP,
             'test' => DEVVM_IP
           }
+        },
+        'redis' => {
+          'url' => "redis://#{DEVVM_IP}:6379/12",
+          'environment' => "feeder_dev"
         },
         'database_setup' => true,
         'ruby_version' => '1.9.3'
