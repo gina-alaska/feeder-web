@@ -34,7 +34,9 @@ template "/etc/init.d/unicorn_#{app_name}" do
     user: node[app_name]['account'],
     unicorn_config_file: node[app_name]['unicorn']['config_path'],
     environment: node[app_name]['environment'],
-    ruby_version: node[app_name]['ruby_version']
+    ruby_version: node[app_name]['ruby_version'],
+    redis_url: node[app_name]['redis']['url'],
+    redis_environment: node[app_name]['redis']['environment']
   })
 end
 

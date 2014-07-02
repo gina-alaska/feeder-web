@@ -69,6 +69,11 @@ defined?(ActiveRecord::Base) and
   '
 }
 
+#Redis
+default['feeder-web']['redis']['url'] = "redis://localhost:6372/12"
+default['feeder-web']['redis']['environment'] = "feeder_production"
+
+
 #Sidekiq Configuration
 default['feeder-web']['sidekiq']['action'] = [:enable]
 default['feeder-web']['sidekiq']['pidfile'] = 'tmp/pids/sidekiq.pid'
@@ -78,6 +83,7 @@ default['feeder-web']['sidekiq']['environments'] = {
     'concurrency' => 2
   }
 }
+
 
 #Mounts
 default['feeder-web']['mounts'] = {
