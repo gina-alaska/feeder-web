@@ -11,7 +11,7 @@ class Feed < ActiveRecord::Base
   belongs_to :category
 
   def preview
-    entries.order(uid: :desc).first
+    entries.available.order(uid: :desc).first
   end
 
   def online?
