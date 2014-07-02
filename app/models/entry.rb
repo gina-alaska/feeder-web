@@ -25,8 +25,8 @@ class Entry < ActiveRecord::Base
   extend Dragonfly::Model
   dragonfly_accessor :image do
     copy_to(:image) do |i|
-      if i.format == :tif
-        i.process(:layer, 1, :jpg)
+      if i.format == 'tiff'
+        i.convert("", 'format' => 'jpg', 'frame' => 1)
       else
         i.encode(:jpg)
       end
