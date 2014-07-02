@@ -57,7 +57,9 @@ class EntriesController < ApplicationController
     end
 
     def set_page_headers
-      response.headers['X-Previous-Entries'] = feed_entries_url(@feed, max_id: @entries.last.uid, count: entries_limit)
+      header_params = {count: entries_limit}
+      header_params[:max_id] = @entries.last.uid if @entries.any?
+      response.headers['X-Previous-Entries'] = feed_entries_url(@feed, header_params)
     end
 
 end
