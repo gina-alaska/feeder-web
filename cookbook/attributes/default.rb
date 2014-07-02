@@ -70,7 +70,7 @@ defined?(ActiveRecord::Base) and
 }
 
 #Redis
-default['feeder-web']['redis']['url'] = "redis://localhost:6372/12"
+default['feeder-web']['redis']['url'] = "redis://localhost:6379/12"
 default['feeder-web']['redis']['environment'] = "feeder_production"
 
 
