@@ -5,13 +5,17 @@ class EntriesController < ApplicationController
   before_action :set_feed
   after_action :set_page_headers, only: [:index]
   skip_before_action :verify_authenticity_token, only: [:create]
+  
+  respond_to :html, :json
 
   # GET /entries
   # GET /entries.json
   def index
-    @entries = @feed.entries.available.order(uid: :desc).limit(entries_limit)
+    @entries = @feed.entries.available.latest.limit(entries_limit)
     @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
-    @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?
+    @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?        
+    
+    respond_with @entries
   end
 
   # GET /entries/1
@@ -43,7 +47,7 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      payload = JSON.parse(params[:payload])
+      payload = params.require(:payload).permit(:data_url, :event_date, :event_url, :feed_url)
       {
         feed: Feed.friendly.find(params[:feed_id]),
         source_url: payload['data_url'],

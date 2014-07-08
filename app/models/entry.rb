@@ -13,6 +13,8 @@ class Entry < ActiveRecord::Base
 
   belongs_to :feed
 
+  scope :latest, -> { order(uid: :desc) }
+
   aasm do
     state :waiting, :initial => true
     state :available
@@ -37,6 +39,10 @@ class Entry < ActiveRecord::Base
 
   def starred?(user)
     self.stars.where(user: user).any?
+  end
+
+  def to_s
+    event_at
   end
 
   private

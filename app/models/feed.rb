@@ -17,4 +17,8 @@ class Feed < ActiveRecord::Base
   def online?
     self.status == 'online'
   end
+  
+  def to_s
+    title
+  end
 end

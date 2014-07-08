@@ -1,0 +1,5 @@
+%h1 Listing entries
+- @entries.each do |entry|
+  = link_to [@feed, entry], class: 'thumbnail pull-left text-center' do
+    = image_tag entry.image.thumb('200x200').url
+    %div= entry
