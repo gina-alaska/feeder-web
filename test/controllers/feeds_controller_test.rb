@@ -28,6 +28,11 @@ class FeedsControllerTest < ActionController::TestCase
     get :show, id: @feed
     assert_response :success
   end
+  
+  test "should show empty feed" do
+    get :show, id: feeds(:barrow_radar)
+    assert_response :success
+  end
 
   test "should get edit" do
     get :edit, id: @feed

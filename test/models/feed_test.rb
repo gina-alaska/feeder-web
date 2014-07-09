@@ -17,7 +17,7 @@ describe Feed do
   end
 
   it('generates the correct preview url') do
-    feed.preview.must_equal entries(:entry_one), "Used the wrong entry for the preview url"
+    feed.preview.must_equal entries(:entry_two), "Used the wrong entry for the preview url"
   end
 
   it('belongs_to category') do

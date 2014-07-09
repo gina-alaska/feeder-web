@@ -3,14 +3,14 @@
 entry_one:
   feed: barrow_webcam
   title: EntryOne
-  aasm_state: available
+  aasm_state: waiting
   location: MyString
   image_uid: foo.jpg
   preview_uid: preview.jpg
   event_at: 2014-06-06 14:15:08
   source_url: http://some.url/
 entry_two:
-  feed: barrow_radar
+  feed: barrow_webcam
   title: EntryTwo
   aasm_state: available
   location: MyString
