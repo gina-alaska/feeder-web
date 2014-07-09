@@ -10,7 +10,7 @@
       %tr
         %td
           %div= feed
-          = image_tag feed.entries.latest.first.image.thumb('100x100').url
+          = image_tag feed.entries.recent.first.preview.thumb('100x100').url
         %td
           .btn-group
             = link_to "Entries", [feed, :entries], class: 'btn btn-default'

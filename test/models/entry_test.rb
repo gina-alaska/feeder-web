@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe Entry do
 
-  let(:entry){entries(:one)}
+  let(:entry){entries(:entry_one)}
 
   it('is valid with valid params') do
     entry.must_be :valid?, "Unable to create Entry with valid parameters"

@@ -1,14 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  feed: one
+entry_one:
+  feed: barrow_webcam
   title: EntryOne
+  aasm_state: available
   location: MyString
+  image_uid: foo.jpg
+  preview_uid: preview.jpg
   event_at: 2014-06-06 14:15:08
   source_url: http://some.url/
-two:
-  feed: one
+entry_two:
+  feed: barrow_radar
   title: EntryTwo
+  aasm_state: available
   location: MyString
+  image_uid: foo.jpg
+  preview_uid: preview.jpg
   event_at: 2014-06-07 14:15:08
   source_url: https://some.ssl.url/with/path

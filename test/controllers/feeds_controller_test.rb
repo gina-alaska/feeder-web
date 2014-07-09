@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FeedsControllerTest < ActionController::TestCase
   setup do
-    @feed = feeds(:one)
+    @feed = feeds(:barrow_webcam)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should create feed" do
     assert_difference('Feed.count') do
-      post :create, feed: {  }
+      post :create, feed: { title: 'Testing', description: 'Some Feed', author: 'MyString', location: 'MyString' }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
@@ -35,7 +35,7 @@ class FeedsControllerTest < ActionController::TestCase
   end
 
   test "should update feed" do
-    patch :update, id: @feed, feed: {  }
+    patch :update, id: @feed, feed: { title: 'Testing2' }
     assert_redirected_to feed_path(assigns(:feed))
   end
 

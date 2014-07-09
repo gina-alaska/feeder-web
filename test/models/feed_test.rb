@@ -1,7 +1,7 @@
 require 'test_helper'
 
 describe Feed do
-  let(:feed){feeds(:one)}
+  let(:feed){feeds(:barrow_webcam)}
 
   it 'is valid with valid parameters' do
     feed.must_be :valid?, "Unable to create Feed with valid params"
@@ -17,7 +17,7 @@ describe Feed do
   end
 
   it('generates the correct preview url') do
-    feed.preview.must_equal entries(:two), "Used the wrong entry for the preview url"
+    feed.preview.must_equal entries(:entry_one), "Used the wrong entry for the preview url"
   end
 
   it('belongs_to category') do

@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  entry: entry_one
-  user: one
+barrow:
+  title: Barrow
+  uid: ABC123
 
-two:
-  entry: entry_one
-  user: one
+modis:
+  title: Modis
+  uid: DEF123

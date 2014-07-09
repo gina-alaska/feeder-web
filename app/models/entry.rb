@@ -13,7 +13,7 @@ class Entry < ActiveRecord::Base
 
   belongs_to :feed
 
-  scope :latest, -> { order(uid: :desc) }
+  scope :recent, -> { available.order(uid: :desc) }
 
   aasm do
     state :waiting, :initial => true

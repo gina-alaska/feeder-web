@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :slideshows
+
   resources :categories
 
   get '/logout', to: 'sessions#destroy'
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :feeds do
     get :more_info
-    resources :entries
+    resources :entries, except: [:new, :edit]
   end
 
   get '/preview/*id(.:format)' => Dragonfly.app.endpoint { |params, app|
