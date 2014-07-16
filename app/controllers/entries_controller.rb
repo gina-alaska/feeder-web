@@ -2,7 +2,7 @@ class EntriesController < ApplicationController
   MAX_ENTRIES = 100
 
   before_action :set_entry, only: [:show]
-  before_action :set_feed
+  before_action :set_entries, only: [:index]
   after_action :set_page_headers, only: [:index]
   skip_before_action :verify_authenticity_token, only: [:create]
   
@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = @feed.entries.available.recent.limit(entries_limit)
+    @entries = @entries.recent.order(uid: :desc)
     @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
     @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?        
     
@@ -41,8 +41,18 @@ class EntriesController < ApplicationController
       @entry = Entry.friendly.find(params[:id])
     end
 
-    def set_feed
-      @feed = Feed.friendly.find(params[:feed_id])
+    def set_entries
+      if params[:feed_id].present?
+        @feed = Feed.friendly.find(params[:feed_id]) 
+        @entries = @feed.entries.limit(entries_limit)
+      elsif params[:slideshow_id].present?
+        @slideshow = Slideshow.find_by_uid(params[:slideshow_id])
+        @entries = @slideshow.entries.limit(12)
+      end
+    end
+    
+    def set_slideshow
+      @slideshow = Slideshow.find_uid(params[:slideshow_id]) if params[:slideshow_id].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -63,7 +73,11 @@ class EntriesController < ApplicationController
     def set_page_headers
       header_params = {count: entries_limit}
       header_params[:max_id] = @entries.last.uid if @entries.any?
-      response.headers['X-Previous-Entries'] = feed_entries_url(@feed, header_params)
+      if @feed.present?
+        response.headers['X-Previous-Entries'] = feed_entries_url(@feed, header_params)
+      elsif @slideshow.present?
+        response.headers['X-Previous-Entries'] = slideshow_entries_url(@slideshow, header_params)
+      end
     end
 
 end

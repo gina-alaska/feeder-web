@@ -18,7 +18,7 @@ class SlideshowsControllerTest < ActionController::TestCase
 
   test "should create slideshow" do
     assert_difference('Slideshow.count') do
-      post :create, slideshow: { title: @slideshow.title, uid: @slideshow.uid }
+      post :create, slideshow: { title: @slideshow.title }
     end
 
     assert_redirected_to slideshow_path(assigns(:slideshow))
@@ -35,7 +35,7 @@ class SlideshowsControllerTest < ActionController::TestCase
   end
 
   test "should update slideshow" do
-    patch :update, id: @slideshow, slideshow: { title: @slideshow.title, uid: @slideshow.uid }
+    patch :update, id: @slideshow, slideshow: { title: @slideshow.title + ' abc' }
     assert_redirected_to slideshow_path(assigns(:slideshow))
   end
 

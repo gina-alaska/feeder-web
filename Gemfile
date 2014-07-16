@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,7 +37,15 @@ gem 'unicorn'
 # gem 'debugger', group: [:development, :test]
 group :test do
   gem 'minitest', '~> 5.0'
+  gem 'minitest-reporters'
 end
+
+group :development do
+  gem 'guard-minitest'
+end
+
+gem 'nested_form'
+gem 'bootstrap_form'
 
 gem "pg"
 gem "haml"

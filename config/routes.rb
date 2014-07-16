@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :slideshows
+  resources :slideshows do
+    resources :entries, only: [:index]
+  end
 
   resources :categories
 
@@ -17,6 +19,12 @@ Rails.application.routes.draw do
   resources :feeds do
     get :more_info
     resources :entries, except: [:new, :edit]
+    resources :slideshows, only: [:add, :remove] do
+      member do
+        get :add
+        get :remove
+      end
+    end
   end
 
   get '/preview/*id(.:format)' => Dragonfly.app.endpoint { |params, app|

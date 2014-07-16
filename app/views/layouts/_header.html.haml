@@ -1,0 +1,27 @@
+%nav.navbar.navbar-default.navbar-static-top
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle{ data: { toggle: 'collapse', target: '#header-navbar' }}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar        
+        %span.icon-bar
+      = link_to root_url, class: 'navbar-brand' do
+        GINA Puffin Feeder
+    #header-navbar.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        - if signed_in?
+          %li 
+            = link_to feeds_path do
+              Feeds
+          %li
+            = link_to slideshows_path do
+              Slideshows
+          %li
+            = link_to logout_path, method: :delete do
+              Logout
+        - else
+          %li
+            = link_to login_path do
+              Login
+      

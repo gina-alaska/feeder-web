@@ -1,0 +1,55 @@
+.row
+  .col-lg-8.col-md-8.col-sm-8
+    %h1
+      = @slideshow
+      slideshow
+    .lead
+      %p
+        Your slideshow code is:
+        %div.text-center
+          %b.text-info{ style: 'font-size: 3em;' }= @slideshow.uid.upcase
+      %p
+        Enter the above code into the 
+        %b Puffin Feeder Slideshow 
+        application to access the imagery feeds
+      
+      
+    %h3 Slideshow Preview
+    - @slideshow.entries.recent.limit(12).each do |entry|
+      .thumbnail.pull-left{ style: 'margin-right: 5px;' }
+        = image_tag entry.image.thumb('200x200#').url
+        %div.text-center
+          %b= entry.feed.title
+        %div.text-center
+          = entry
+            
+  .col-lg-4.col-md-4.col-sm-4
+    .panel.panel-default
+      .panel-heading
+        .panel-title Information
+      %ul.list-group
+        %li.list-group-item Feeds:
+        - @slideshow.feeds.each do |feed|
+          - next if feed.entries.available.empty?
+          %li.list-group-item.clearfix
+            .pull-left
+              = link_to [feed, :entries], target: :_blank do
+                = image_tag feed.preview.image.thumb('50x50#').url, style: 'margin-right: 10px;'
+            %b= link_to feed, [feed,:entries], target: :_blank
+            %br/
+            = link_to [:remove, feed, @slideshow], remote: true, class: 'btn btn-danger' do
+              Remove from slideshow
+        - Feed.where.not(id: @slideshow.feed_ids).each do |feed|
+          %li.list-group-item.clearfix
+            .pull-left
+              = link_to [feed, :entries], target: :_blank do
+                = image_tag feed.preview.image.thumb('50x50#').url, style: 'margin-right: 10px;'
+            %b= link_to feed, [feed, :entries], target: :_blank
+            %br/
+            = link_to [:add, feed, @slideshow], remote: true, class: 'btn btn-success' do
+              Add to slideshow
+        
+      .panel-body
+        = link_to edit_slideshow_path(@slideshow), class: 'btn btn-default btn-block' do
+          %i.fa.fa-gears
+          Change Settings

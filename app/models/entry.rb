@@ -47,6 +47,6 @@ class Entry < ActiveRecord::Base
 
   private
   def generate_uid
-    self.uid = "#{event_at.to_i}#{id % 1000}".to_i if uid.nil?
+    self.uid = "#{event_at.to_i}#{"%03i" % (id % 1000)}".to_i if uid.nil?
   end
 end

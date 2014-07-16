@@ -1,10 +1,43 @@
 class SlideshowsController < ApplicationController
-  before_action :set_slideshow, only: [:show, :edit, :update, :destroy]
+  before_action :set_slideshow, only: [:show, :edit, :update, :destroy, :add, :remove]
 
   # GET /slideshows
   # GET /slideshows.json
   def index
     @slideshows = Slideshow.all
+  end
+
+  def add
+    @feed = Feed.friendly.find(params[:feed_id])
+    @slideshow.feeds << @feed unless @slideshow.feeds.include?(@feed)
+    
+    msg = "Added #{@feed} to slideshow"
+    respond_to do |format|
+      format.html {
+        flash[:notice] = msg
+        redirect_to @slideshow
+      }
+      format.js {
+        flash.now[:notice] = msg
+        redirect_via_turbolinks_to @slideshow
+      }
+    end
+  end
+  
+  def remove
+    @feed = Feed.friendly.find(params[:feed_id])
+    @slideshow.feeds.destroy(@feed)
+    msg = "Removed #{@feed} from slideshow"
+    respond_to do |format|
+      format.html {
+        flash[:notice] = msg
+        redirect_to @slideshow
+      }
+      format.js {
+        flash.now[:notice] = msg
+        redirect_via_turbolinks_to @slideshow
+      }
+    end
   end
 
   # GET /slideshows/1
@@ -64,7 +97,7 @@ class SlideshowsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slideshow
-      @slideshow = Slideshow.find(params[:id])
+      @slideshow = Slideshow.find_by_uid(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

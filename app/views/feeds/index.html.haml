@@ -7,7 +7,7 @@
       
   %tbody
     - @feeds.each do |feed|
-      - next if feed.entries.empty?
+      - next if feed.entries.recent.empty?
       %tr
         %td
           %div= feed
