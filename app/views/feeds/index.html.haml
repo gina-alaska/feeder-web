@@ -1,5 +1,5 @@
 %h1 Choose a feed
-- @feeds.each do |feed|
-  - next if feed.entries.recent.empty?
-  %div
+%div.text-center
+  - @feeds.each do |feed|
+    - next if feed.entries.recent.empty?
     = render 'entry', entry: feed.preview
