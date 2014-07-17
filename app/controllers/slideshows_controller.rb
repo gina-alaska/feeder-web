@@ -98,7 +98,7 @@ class SlideshowsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slideshow
-      @slideshow = Slideshow.find_by_uid(params[:id])
+      @slideshow = Slideshow.find_by_uid(params[:id].downcase)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

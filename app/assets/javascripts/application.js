@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap
+//= require bootstrap-datepicker/js/bootstrap-datepicker
+//= require moment/moment
 //= require turbolinks
 //= require_tree .

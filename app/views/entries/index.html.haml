@@ -1,9 +1,12 @@
-%h1= @feed
-- @entries.each do |entry|
-  = link_to [entry], class: 'thumbnail pull-left text-center entry-thumb' do
-    %p
-      - unless entry.highlight.nil?
-        %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
-      = entry
-
-    = image_tag entry.preview.thumb('200x200').url
+.row-fluid
+  .col-lg-3.col-md-3.col-sm-4
+    #calendar.panel.panel-default
+      .panel-heading 
+        Pick a date
+      %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries' } }
+  .col-lg-9.col-md-9.col-sm-8
+    %h2= @feed
+    - if @entries.count == 0
+      %h1.text-center No entries found for this date
+    - @entries.each do |entry|
+      = render entry

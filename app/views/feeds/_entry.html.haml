@@ -1,0 +1,10 @@
+= link_to [entry.feed, :entries], class: 'thumbnail pull-left text-center entry-thumb' do
+  %h4= entry.feed
+    
+  %p
+    - unless entry.highlight.nil?
+      %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
+    
+    = entry
+
+  = image_tag entry.preview.thumb('200x200#').url

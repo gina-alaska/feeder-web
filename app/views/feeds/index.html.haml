@@ -1,21 +1,5 @@
-%h1 Listing feeds
-%table.table.table-bordered.table-striped.table-condensed
-  %thead
-    %tr
-      %th Title
-      %th{:colspan => "3"}
-      
-  %tbody
-    - @feeds.each do |feed|
-      - next if feed.entries.recent.empty?
-      %tr
-        %td
-          %div= feed
-          = image_tag feed.entries.recent.first.preview.thumb('100x100').url
-        %td
-          .btn-group
-            = link_to "Entries", [feed, :entries], class: 'btn btn-default'
-            = link_to 'Edit', edit_feed_path(feed), class: 'btn btn-info'
-            = link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-%br/
-= link_to 'New Feed', new_feed_path
+%h1 Choose a feed
+- @feeds.each do |feed|
+  - next if feed.entries.recent.empty?
+  %div
+    = render 'entry', entry: feed.preview

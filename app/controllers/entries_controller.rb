@@ -12,8 +12,21 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = @entries.recent.order(uid: :desc)
-    @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
-    @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?        
+    
+    if params[:slideshow_id].present?
+      # slideshow
+      @entries = @entries.limit(12)
+    elsif params[:max_id].present? or params[:since_id].present?
+      # continuous scrolling!
+      @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
+      @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?        
+    else
+      # calendar based viewing
+      @calendar_date = Date.parse(params[:date]) if params[:date].present?
+      @calendar_date ||= Time.zone.now
+      
+      @entries = @entries.where(event_at: [@calendar_date.to_time.beginning_of_day..@calendar_date.to_time.end_of_day])
+    end
     
     respond_with @entries
   end
@@ -44,10 +57,10 @@ class EntriesController < ApplicationController
     def set_entries
       if params[:feed_id].present?
         @feed = Feed.friendly.find(params[:feed_id]) 
-        @entries = @feed.entries.limit(entries_limit)
+        @entries = @feed.entries
       elsif params[:slideshow_id].present?
         @slideshow = Slideshow.find_by_uid(params[:slideshow_id])
-        @entries = @slideshow.entries.limit(12)
+        @entries = @slideshow.entries
       end
     end
     
