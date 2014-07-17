@@ -1,5 +1,9 @@
-%h1 Listing entries
+%h1= @feed
 - @entries.each do |entry|
-  = link_to [@feed, entry], class: 'thumbnail pull-left text-center' do
+  = link_to [entry], class: 'thumbnail pull-left text-center entry-thumb' do
+    %p
+      - unless entry.highlight.nil?
+        %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
+      = entry
+
     = image_tag entry.preview.thumb('200x200').url
-    %div= entry

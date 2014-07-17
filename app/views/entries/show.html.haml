@@ -1,1 +1,15 @@
-= image_tag @entry.preview.remote_url
+.entry.panel.panel-default
+  .panel-heading.navbar.navbar-default.navbar-static-top{ style: 'margin-bottom: 0; padding: 1px;' }
+    .container-fluid
+      .navbar-brand
+        - if @entry.highlight.nil?
+          = link_to_if signed_in?, '<i class="fa fa-star-o"></i>'.html_safe, new_entry_highlights_path(@entry)
+        - else
+          = link_to_if signed_in?, "<i class=\"fa fa-star highlight\" title=\"#{@entry.highlight}\" data-behavior=\"tooltip\"></i>".html_safe, entry_highlights_path(@entry)
+          
+      
+        = link_to @entry.feed, [@entry.feed, :entries]
+        = " - #{@entry.event_at}"
+
+  .panel-body.text-center
+    = image_tag @entry.image.remote_url

@@ -12,6 +12,7 @@ class Entry < ActiveRecord::Base
   has_many :users, through: :stars
 
   belongs_to :feed
+  belongs_to :highlight
 
   scope :recent, -> { available.order(uid: :desc) }
 

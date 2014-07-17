@@ -18,13 +18,19 @@ Rails.application.routes.draw do
 
   resources :feeds do
     get :more_info
-    resources :entries, except: [:new, :edit]
+    
+    resources :entries, shallow: true
+    
     resources :slideshows, only: [:add, :remove] do
       member do
         get :add
         get :remove
       end
     end
+  end
+  
+  resources :entries, only:[] do
+    resource :highlights
   end
 
   get '/preview/*id(.:format)' => Dragonfly.app.endpoint { |params, app|

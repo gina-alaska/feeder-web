@@ -15,13 +15,14 @@
       
       
     %h3 Slideshow Preview
-    - @slideshow.entries.recent.limit(12).each do |entry|
-      .thumbnail.pull-left{ style: 'margin-right: 5px;' }
-        = image_tag entry.image.thumb('200x200#').url
-        %div.text-center
-          %b= entry.feed.title
-        %div.text-center
-          = entry
+    = render 'carousel'
+    / - @slideshow.entries.recent.limit(12).each do |entry|
+    /   .thumbnail.pull-left{ style: 'margin-right: 5px;' }
+    /     = image_tag entry.image.thumb('200x200#').url
+    /     %div.text-center
+    /       %b= entry.feed.title
+    /     %div.text-center
+    /       = entry
             
   .col-lg-4.col-md-4.col-sm-4
     .panel.panel-default

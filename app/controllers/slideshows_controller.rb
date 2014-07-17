@@ -43,6 +43,7 @@ class SlideshowsController < ApplicationController
   # GET /slideshows/1
   # GET /slideshows/1.json
   def show
+    @entries = @slideshow.entries.recent.limit(12)
   end
 
   # GET /slideshows/new
