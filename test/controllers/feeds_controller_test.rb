@@ -3,6 +3,8 @@ require 'test_helper'
 class FeedsControllerTest < ActionController::TestCase
   setup do
     @feed = feeds(:barrow_webcam)
+    @user = users(:admin)
+    session[:user_id] = @user.id
   end
 
   test "should get index" do

@@ -3,6 +3,8 @@ require 'test_helper'
 class SlideshowsControllerTest < ActionController::TestCase
   setup do
     @slideshow = slideshows(:barrow)
+    @user = users(:admin)
+    session[:user_id] = @user.id
   end
 
   test "should get index" do
