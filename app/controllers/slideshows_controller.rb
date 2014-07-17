@@ -1,5 +1,6 @@
 class SlideshowsController < ApplicationController
   before_action :set_slideshow, only: [:show, :edit, :update, :destroy, :add, :remove]
+  load_and_authorize_resource
 
   # GET /slideshows
   # GET /slideshows.json

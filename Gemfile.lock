@@ -47,6 +47,7 @@ GEM
     bootstrap_form (2.1.1)
     builder (3.2.2)
     bunny (0.7.9)
+    cancancan (1.8.4)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -334,6 +335,7 @@ DEPENDENCIES
   bootstrap-kaminari-views
   bootstrap_form
   bower-tools!
+  cancancan (~> 1.8)
   capistrano (~> 3.0)
   capistrano-bundler
   capistrano-chef

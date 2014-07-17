@@ -1,6 +1,7 @@
 class HighlightsController < ApplicationController
   before_action :set_entry
   before_action :set_highlight, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /highlights
   # GET /highlights.json
