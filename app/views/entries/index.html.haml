@@ -8,5 +8,12 @@
     %h2= @feed
     - if @entries.count == 0
       %h1.text-center No entries found for this date
+    - if @paginated
+      .clearfix.text-center
+        = paginate @entries, :theme => 'twitter-bootstrap-3'
     - @entries.each do |entry|
       = render entry
+    
+    - if @paginated
+      .clearfix.text-center
+        = paginate @entries, :theme => 'twitter-bootstrap-3'

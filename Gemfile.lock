@@ -41,6 +41,9 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
+    bootstrap-kaminari-views (0.0.3)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap_form (2.1.1)
     builder (3.2.2)
     bunny (0.7.9)
@@ -138,6 +141,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
+    kaminari (0.16.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -325,6 +331,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  bootstrap-kaminari-views
   bootstrap_form
   bower-tools!
   capistrano (~> 3.0)
@@ -340,6 +347,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   minitest (~> 5.0)
   minitest-reporters
   nested_form

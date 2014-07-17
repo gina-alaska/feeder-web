@@ -11,7 +11,11 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
+    @paginated = false
     @entries = @entries.recent.order(uid: :desc)
+    
+    @calendar_date = Date.parse(params[:date]) if params[:date].present?
+    @calendar_date ||= Time.zone.now
     
     if params[:slideshow_id].present?
       # slideshow
@@ -20,12 +24,13 @@ class EntriesController < ApplicationController
       # continuous scrolling!
       @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
       @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?        
-    else
+    elsif params[:date].present?
       # calendar based viewing
-      @calendar_date = Date.parse(params[:date]) if params[:date].present?
-      @calendar_date ||= Time.zone.now
-      
-      @entries = @entries.where(event_at: [@calendar_date.to_time.beginning_of_day..@calendar_date.to_time.end_of_day])
+      @paginated = true
+      @entries = @entries.where(event_at: [@calendar_date.to_time.beginning_of_day..@calendar_date.to_time.end_of_day]).page(params[:page])
+    else
+      @paginated = true
+      @entries = @entries.page(params[:page])
     end
     
     respond_with @entries
@@ -80,7 +85,7 @@ class EntriesController < ApplicationController
     end
 
     def entries_limit
-      [MAX_ENTRIES, (params[:count] || 10).to_i].min
+      [MAX_ENTRIES, (params[:count] || 20).to_i].min
     end
 
     def set_page_headers
