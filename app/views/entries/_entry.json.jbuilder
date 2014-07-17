@@ -5,6 +5,5 @@ json.feed_url feed_url(entry.feed, :json)
 json.source_url entry.source_url
 json.data_url File.join(entry.helpers.root_url, entry.image.remote_url)
 json.preview_url entry_preview_url(entry.preview_uid)
-json.starred entry.starred?(current_user)
 json.highlighted entry.highlight.present?
 json.highlight_description entry.highlight.try(:description)
