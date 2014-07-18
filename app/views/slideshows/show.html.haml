@@ -41,13 +41,13 @@
               %br/
               = link_to [:remove, feed, @slideshow], remote: true, class: 'btn btn-danger' do
                 Remove from slideshow
-        - Feed.where.not(id: @slideshow.feed_ids).each do |feed|
-          %li.list-group-item.clearfix
-            .pull-left
-              = link_to [feed, :entries], target: :_blank do
-                = image_tag feed.preview.image.thumb('50x50#').url, style: 'margin-right: 10px;'
-            %b= link_to feed, [feed, :entries], target: :_blank
-            - if can? :manage, @slideshow
+        - if can? :manage, @slideshow
+          - Feed.where.not(id: @slideshow.feed_ids).each do |feed|
+            %li.list-group-item.clearfix
+              .pull-left
+                = link_to [feed, :entries], target: :_blank do
+                  = image_tag feed.preview.image.thumb('50x50#').url, style: 'margin-right: 10px;'
+              %b= link_to feed, [feed, :entries], target: :_blank
               %br/
               = link_to [:add, feed, @slideshow], remote: true, class: 'btn btn-success' do
                 Add to slideshow
