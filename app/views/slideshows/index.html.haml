@@ -1,17 +1,11 @@
-%h1 Listing slideshows
-%table.table.table-bordered.table-striped.table-condensed
-  %thead
-    %tr
-      %th Title
-      %th Uid
-      %th{:colspan => "3"}
-  %tbody
-    - @slideshows.each do |slideshow|
-      %tr
-        %td= slideshow.title
-        %td= slideshow.uid
-        %td= link_to 'Show', slideshow
-        %td= link_to 'Edit', edit_slideshow_path(slideshow)
-        %td= link_to 'Destroy', slideshow, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Slideshow', new_slideshow_path
+%h1 
+  Listing slideshows
+  = link_to new_slideshow_path, class: 'btn btn-success pull-right' do
+    %i.fa.fa-plus
+    New Slideshow
+- @slideshows.each do |slideshow|
+  = link_to slideshow, class: 'thumbnail pull-left' do
+    %h4.text-center= slideshow
+    = image_tag slideshow.entries.recent.first.image.thumb('200x200#').url if slideshow.entries.recent.any?
+    %h1.text-center
+      = slideshow.uid.upcase
