@@ -39,7 +39,7 @@ namespace :dev do
           entry_hash = {
             'version' => '0.0.1-fake',
             'type' => 'create',
-            'payload[data_url]' => entry['image'],
+            'payload[data_url]' => entry['source'],
             'payload[event_date]' => entry['event_at'],
             #These two are incorrect, but aren't used.
             # Included for completeness
