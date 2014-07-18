@@ -16,3 +16,7 @@ $(document).on 'ready page:load', ->
     date = moment(e.date)
     path = top.location.pathname
     Turbolinks.visit(path + "?date=#{date.format('YYYY-MM-DD')}")
+
+  $('[data-behavior="time-ago"]').each (index,item) ->
+    m = moment($(item).data('date'))
+    $(item).html(m.fromNow())

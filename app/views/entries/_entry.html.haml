@@ -2,7 +2,11 @@
   %p
     - unless entry.highlight.nil?
       %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
-    
+
+    Processed
+    %span{ data: { date: entry.event_at, behavior: 'time-ago' } }
+    %br/
     = entry
 
   = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
+

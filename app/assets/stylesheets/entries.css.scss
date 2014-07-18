@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .entry-thumb {
-  margin: 5px;
+  color: #333;
+  
+  &.thumbnail {
+    margin: 2px 2px 6px 2px;
+  }
 }
 
 .entry img {
