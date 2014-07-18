@@ -1,5 +1,23 @@
 .row-fluid
   .col-lg-3.col-md-3.col-sm-4
+    .dropdown
+      %button.btn.btn-default.btn-block.btn-lg{ data: { toggle: 'dropdown' } }
+        = image_tag @feed.preview.image.thumb('25x25#').url
+        = @feed
+        %span.caret
+    
+      %ul.dropdown-menu{ role: 'menu', style: 'width: 100%;' }
+        - Feed.all.each do |feed|
+          - next if feed.entries.recent.count == 0
+          %li
+            = link_to [feed, :entries], style: 'font-size: 1.1em;' do
+              = image_tag feed.preview.image.thumb('25x25#').url
+              = feed
+              .badge.pull-right
+                = feed.entries.recent.count
+    
+    %br/
+    
     #calendar.panel.panel-default
       .panel-heading 
         Pick a date
@@ -11,8 +29,9 @@
     - if @paginated
       .clearfix.text-center
         = paginate @entries, :theme => 'twitter-bootstrap-3'
-    - @entries.each do |entry|
-      = render entry
+    .text-center
+      - @entries.each do |entry|
+        = render entry
     
     - if @paginated
       .clearfix.text-center
