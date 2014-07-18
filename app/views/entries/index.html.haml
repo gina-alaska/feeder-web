@@ -23,7 +23,6 @@
         Pick a date
       %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: Time.zone.now.to_date, date_start_date: @feed.entries.order(event_at: :asc).first.event_at.to_date } }
   .col-lg-9.col-md-9.col-sm-8
-    %h2= @feed
     - if @entries.count == 0
       %h1.text-center No entries found for this date
     - if @paginated
