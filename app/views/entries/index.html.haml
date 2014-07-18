@@ -9,11 +9,11 @@
       %ul.dropdown-menu{ role: 'menu', style: 'width: 100%;' }
         - Feed.all.each do |feed|
           - next if feed.entries.recent.count == 0
-          %li
-            = link_to [feed, :entries], style: 'font-size: 1.1em;' do
-              = image_tag feed.preview.image.thumb('25x25#').url
+          %li{ class: feed == @feed ? 'active' : '', style: 'min-height: 31px;' }
+            = link_to [feed, :entries], style: 'font-size: 1.1em; line-height: 1.1em;' do
+              = image_tag feed.preview.image.thumb('25x25#').url, size: '25x25'
               = feed
-              .badge.pull-right
+              .badge.pull-right{ style: 'margin-top: 3px;' }
                 = feed.entries.recent.count
     
     %br/
