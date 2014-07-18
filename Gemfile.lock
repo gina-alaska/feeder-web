@@ -360,6 +360,7 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 4.1.4)
+  rake
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   sidekiq

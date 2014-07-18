@@ -25,14 +25,11 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'cancancan', '~> 1.8'
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-gem 'unicorn'
+gem 'unicorn', group: :production
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -40,12 +37,9 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 group :test do
+  gem 'rake'
   gem 'minitest', '~> 5.0'
   gem 'minitest-reporters'
-end
-
-group :development do
-  gem 'guard-minitest'
 end
 
 gem 'nested_form'
@@ -59,14 +53,20 @@ gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
-gem "pry-rails", group: :development
 gem "dragonfly"
 gem "friendly_id"
 gem "sidekiq"
 gem "aasm"
 gem 'sinatra', require: false
-gem 'capistrano', '~> 3.0'
-gem 'capistrano-chruby'
-gem 'capistrano-bundler'
-gem 'capistrano-rails'
-gem 'capistrano-chef'
+
+group :development do
+  gem 'guard-minitest'
+  gem 'capistrano', '~> 3.0'
+  gem 'capistrano-chruby'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-chef'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem "pry-rails"
+end
