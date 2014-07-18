@@ -6,5 +6,5 @@ development:
 test:
   adapter: postgresql
   database: travis_ci_test
-  username: postgresql
+  username: postgres
   client_encoding: UTF8
