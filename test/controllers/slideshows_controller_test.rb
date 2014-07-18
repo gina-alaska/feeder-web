@@ -28,6 +28,11 @@ class SlideshowsControllerTest < ActionController::TestCase
 
   test "should show slideshow" do
     get :show, id: @slideshow
+    
+    assert_not_nil assigns(:slideshow)
+    assert_not_nil assigns(:available_feeds)
+    assert_not_nil assigns(:active_feeds)
+    
     assert_response :success
   end
 

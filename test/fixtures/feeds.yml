@@ -15,3 +15,12 @@ barrow_radar:
   status: 'not online'
   author: MyString
   location: MyString
+
+highlights:
+  type: HighlightFeed
+  title: Barrow Radar
+  description: MyText
+  author: MyString
+  status: 'not online'
+  author: MyString
+  location: MyString

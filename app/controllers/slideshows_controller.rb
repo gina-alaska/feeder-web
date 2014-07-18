@@ -5,7 +5,7 @@ class SlideshowsController < ApplicationController
   # GET /slideshows
   # GET /slideshows.json
   def index
-    @slideshows = Slideshow.all
+    @slideshows = Slideshow.order(title: :asc)
   end
 
   def add
@@ -45,6 +45,8 @@ class SlideshowsController < ApplicationController
   # GET /slideshows/1.json
   def show
     @entries = @slideshow.entries.recent.limit(12)
+    @active_feeds = @slideshow.feeds.order(title: :asc)
+    @available_feeds = Feed.where.not(id: @slideshow.feed_ids).order(title: :asc)
   end
 
   # GET /slideshows/new

@@ -16,13 +16,6 @@
       
     %h3 Slideshow Preview
     = render 'carousel'
-    / - @slideshow.entries.recent.limit(12).each do |entry|
-    /   .thumbnail.pull-left{ style: 'margin-right: 5px;' }
-    /     = image_tag entry.image.thumb('200x200#').url
-    /     %div.text-center
-    /       %b= entry.feed.title
-    /     %div.text-center
-    /       = entry
             
   .col-lg-4.col-md-4.col-sm-4
     .panel.panel-default
@@ -30,7 +23,7 @@
         .panel-title Information
       %ul.list-group
         %li.list-group-item Feeds:
-        - @slideshow.feeds.each do |feed|
+        - @active_feeds.each do |feed|
           - next if feed.entries.available.empty?
           %li.list-group-item.clearfix
             .pull-left
@@ -42,7 +35,7 @@
               = link_to [:remove, feed, @slideshow], remote: true, class: 'btn btn-danger' do
                 Remove from slideshow
         - if can? :manage, @slideshow
-          - Feed.where.not(id: @slideshow.feed_ids).each do |feed|
+          - @available_feeds.each do |feed|
             %li.list-group-item.clearfix
               .pull-left
                 = link_to [feed, :entries], target: :_blank do

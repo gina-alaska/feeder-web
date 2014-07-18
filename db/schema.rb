@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717222457) do
+ActiveRecord::Schema.define(version: 20140718224408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140717222457) do
     t.integer  "category_id"
     t.boolean  "mobile_compatible", default: true
     t.string   "more_info_url"
+    t.string   "type"
   end
 
   add_index "feeds", ["slug"], name: "index_feeds_on_slug", unique: true, using: :btree

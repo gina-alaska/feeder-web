@@ -15,6 +15,7 @@ class Entry < ActiveRecord::Base
   belongs_to :highlight
 
   scope :recent, -> { available.order(uid: :desc) }
+  scope :highlighted, -> { where.not(highlight: nil) }
 
   aasm do
     state :waiting, :initial => true
