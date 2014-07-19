@@ -15,12 +15,20 @@
       
       
     %h3 Slideshow Preview
-    = render 'carousel'
+    = render 'carousel', entries: @entries
             
   .col-lg-4.col-md-4.col-sm-4
     .panel.panel-default
       .panel-heading
         .panel-title Information
+      .panel-body
+        %dl.dl-horizontal
+          %dt Only shows highlights?
+          %dd= @slideshow.highlights_only? ? 'Yes' : 'No'
+          
+        = link_to edit_slideshow_path(@slideshow), class: 'btn btn-default btn-block' do
+          %i.fa.fa-gears
+          Change Settings
       %ul.list-group
         %li.list-group-item Feeds:
         - @active_feeds.each do |feed|
@@ -36,6 +44,7 @@
                 Remove from slideshow
         - if can? :manage, @slideshow
           - @available_feeds.each do |feed|
+            - next if feed.class == HighlightFeed
             %li.list-group-item.clearfix
               .pull-left
                 = link_to [feed, :entries], target: :_blank do
@@ -44,8 +53,4 @@
               %br/
               = link_to [:add, feed, @slideshow], remote: true, class: 'btn btn-success' do
                 Add to slideshow
-        
-      .panel-body
-        = link_to edit_slideshow_path(@slideshow), class: 'btn btn-default btn-block' do
-          %i.fa.fa-gears
-          Change Settings
+

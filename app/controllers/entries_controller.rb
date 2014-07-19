@@ -66,6 +66,9 @@ class EntriesController < ApplicationController
       elsif params[:slideshow_id].present?
         @slideshow = Slideshow.find_by_uid(params[:slideshow_id])
         @entries = @slideshow.entries
+        if @slideshow.highlights_only?
+          @entries = @entries.highlighted          
+        end
       end
     end
     

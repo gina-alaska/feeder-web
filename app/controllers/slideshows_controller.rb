@@ -45,6 +45,11 @@ class SlideshowsController < ApplicationController
   # GET /slideshows/1.json
   def show
     @entries = @slideshow.entries.recent.limit(12)
+    Rails.logger.info @slideshow.highlights_only?
+    if @slideshow.highlights_only?
+      @entries = @entries.highlighted
+    end
+    
     @active_feeds = @slideshow.feeds.order(title: :asc)
     @available_feeds = Feed.where.not(id: @slideshow.feed_ids).order(title: :asc)
   end
@@ -98,7 +103,8 @@ class SlideshowsController < ApplicationController
     end
   end
 
-  private
+  protected
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_slideshow
       @slideshow = Slideshow.find_by_uid(params[:id].downcase)
@@ -106,6 +112,6 @@ class SlideshowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def slideshow_params
-      params.require(:slideshow).permit(:title, :uid)
+      params.require(:slideshow).permit(:title, :highlights_only)
     end
 end

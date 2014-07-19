@@ -1,11 +1,11 @@
-- unless @entries.empty?
+- unless entries.empty?
   #slideshow-carousel.carousel.slide{ data: { ride: 'carousel' } }
     %ol.carousel-indicators
-      - @entries.count.times do |i|
+      - entries.count.times do |i|
         %li{ class: (i==0 ? 'active' : ''), data: { target: '#slideshow-carousel', slide_to: i } }
     .carousel-inner
-      - @entries.each do |entry|
-        .item{ class: (@entries.first == entry ? 'active' : '') }
+      - entries.each do |entry|
+        .item{ class: (entries.first == entry ? 'active' : '') }
           = image_tag entry.image.thumb('1020x500#').url, alt: entry.title
           .carousel-caption
             %h3
