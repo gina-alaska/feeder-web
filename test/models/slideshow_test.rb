@@ -36,4 +36,13 @@ class SlideshowTest < ActiveSupport::TestCase
     slideshow.save
     assert uid == slideshow.uid
   end
+  
+  test 'highlights only slideshow should only return highlighted entries' do
+    slideshow.highlights_only = true
+    
+    slideshow.entries.each do |entry|
+      assert_not_nil entry.highlight
+    end
+  end
+  
 end
