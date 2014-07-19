@@ -7,7 +7,7 @@
     #calendar.panel.panel-default
       .panel-heading 
         Pick a date
-      %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @source.entries.order(event_at: :asc).last.event_at.to_date, date_start_date: @source.entries.order(event_at: :asc).first.event_at.to_date } }
+      %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @source.entries.available.order(event_at: :asc).last.event_at.to_date, date_start_date: @source.entries.available.order(event_at: :asc).first.event_at.to_date } }
   .col-lg-9.col-md-9.col-sm-8
     - if @entries.count == 0
       %h1.text-center No entries found for this date
