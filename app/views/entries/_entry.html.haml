@@ -1,12 +1,10 @@
 = link_to [entry], class: 'thumbnail pull-left text-center entry-thumb' do
-  %p
+  = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
+
+  %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
     - unless entry.highlight.nil?
       %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
 
-    Processed
-    %span{ data: { date: entry.event_at, behavior: 'time-ago' } }
+    = "Processed #{time_ago_in_words(entry.event_at)}"
     %br/
     = entry
-
-  = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
-

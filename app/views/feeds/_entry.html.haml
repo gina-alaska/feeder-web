@@ -1,10 +1,13 @@
 = link_to [feed, :entries], class: 'thumbnail pull-left text-center entry-thumb' do
   %h4= feed
     
-  %p
+  = image_tag feed.preview.preview.thumb('200x200#').url, size: '200x200'
+
+  %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
     - unless feed.preview.highlight.nil?
       %i.fa.fa-star.highlight{ title: feed.preview.highlight, data: { behavior: 'tooltip' } }
     
+    = "Processed #{time_ago_in_words(feed.preview.event_at)}"
+    %br/
     = feed.preview
 
-  = image_tag feed.preview.preview.thumb('200x200#').url, size: '200x200'
