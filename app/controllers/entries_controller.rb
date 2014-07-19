@@ -14,6 +14,8 @@ class EntriesController < ApplicationController
     @paginated = false
     @entries = @entries.recent.order(uid: :desc)
     
+    @source = @feed || @slideshow
+    
     @calendar_date = Date.parse(params[:date]) if params[:date].present?
     @calendar_date ||= Time.zone.now
     
@@ -66,9 +68,6 @@ class EntriesController < ApplicationController
       elsif params[:slideshow_id].present?
         @slideshow = Slideshow.find_by_uid(params[:slideshow_id])
         @entries = @slideshow.entries
-        if @slideshow.highlights_only?
-          @entries = @entries.highlighted          
-        end
       end
     end
     

@@ -1,27 +1,13 @@
 .row-fluid
   .col-lg-3.col-md-3.col-sm-4
-    .dropdown
-      %button.btn.btn-default.btn-block.btn-lg{ data: { toggle: 'dropdown' } }
-        = image_tag @feed.preview.image.thumb('25x25#').url
-        = @feed
-        %span.caret
-    
-      %ul.dropdown-menu{ role: 'menu', style: 'width: 100%;' }
-        - Feed.all.each do |feed|
-          - next if feed.entries.recent.count == 0
-          %li{ class: feed == @feed ? 'active' : '', style: 'min-height: 31px;' }
-            = link_to [feed, :entries], style: 'font-size: 1.1em; line-height: 1.1em;' do
-              = image_tag feed.preview.image.thumb('25x25#').url, size: '25x25'
-              = feed
-              .badge.pull-right{ style: 'margin-top: 3px;' }
-                = feed.entries.recent.count
-    
-    %br/
+    - unless @source.nil?
+      = render 'feed_select', source: @source
+      %br/
     
     #calendar.panel.panel-default
       .panel-heading 
         Pick a date
-      %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @feed.entries.order(event_at: :asc).last.event_at.to_date, date_start_date: @feed.entries.order(event_at: :asc).first.event_at.to_date } }
+      %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @source.entries.order(event_at: :asc).last.event_at.to_date, date_start_date: @source.entries.order(event_at: :asc).first.event_at.to_date } }
   .col-lg-9.col-md-9.col-sm-8
     - if @entries.count == 0
       %h1.text-center No entries found for this date

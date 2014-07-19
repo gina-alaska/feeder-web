@@ -1,7 +1,12 @@
 class Slideshow < ActiveRecord::Base
   has_many :slideshow_feeds
   has_many :feeds, through: :slideshow_feeds
-  has_many :entries, through: :feeds
+  has_many :entries, ->(owner) {
+    if owner.highlights_only?
+      return self.highlighted 
+    end
+    return self
+  }, through: :feeds
   
   validates :title, presence: true
   validates :uid, uniqueness: true
@@ -11,6 +16,10 @@ class Slideshow < ActiveRecord::Base
   accepts_nested_attributes_for :slideshow_feeds
   accepts_nested_attributes_for :feeds
   
+  
+  def preview
+    self.entries.recent.first
+  end
   
   def self.generate_uid
     SecureRandom.hex(3)
