@@ -7,8 +7,14 @@ class FeedsControllerTest < ActionController::TestCase
     session[:user_id] = @user.id
   end
 
-  test "should get index" do
+  test "should get html index" do
     get :index
+    assert_response :success
+    assert_not_nil assigns(:feeds)
+  end
+  
+  test "should get json index" do
+    get :index, format: :json
     assert_response :success
     assert_not_nil assigns(:feeds)
   end

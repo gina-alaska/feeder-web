@@ -13,6 +13,12 @@ class EntriesControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:entries)
   end
+  
+  test "should get a json list of entries for feeds" do    
+    get :index, feed_id: @feed, format: :json
+    assert_response :success
+    assert_not_nil assigns(:entries)
+  end
 
   test "should get list of entries for slideshow" do    
     get :index, slideshow_id: @slideshow, format: :json
