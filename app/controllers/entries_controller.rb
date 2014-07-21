@@ -22,17 +22,18 @@ class EntriesController < ApplicationController
     if params[:slideshow_id].present?
       # slideshow
       @entries = @entries.limit(12)
-    elsif params[:max_id].present? or params[:since_id].present?
+    elsif params.include?(:max_id) or params.include?(:since_id)
       # continuous scrolling!
-      @entries = @entries.where('uid < ?', params[:max_id]) unless params[:max_id].nil?
-      @entries = @entries.where('uid > ?', params[:since_id]) unless params[:since_id].nil?        
+      @entries = @entries.where('uid < ?', params[:max_id]) if params[:max_id].present?
+      @entries = @entries.where('uid > ?', params[:since_id]) if params[:since_id].present?
+      @entries = @entries.limit(entries_limit)    
     elsif params[:date].present?
       # calendar based viewing
       @paginated = true
       @entries = @entries.where(event_at: [@calendar_date.to_time.beginning_of_day..@calendar_date.to_time.end_of_day]).page(params[:page])
     else
       @paginated = true
-      @entries = @entries.page(params[:page])
+      @entries = @entries.page(params[:page]).per(entries_limit)
     end
     
     respond_with @entries
