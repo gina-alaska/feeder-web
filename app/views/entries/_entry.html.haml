@@ -5,6 +5,6 @@
     - unless entry.highlight.nil?
       %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
 
-    = "Processed #{time_ago_in_words(entry.event_at)}"
+    = "Processed #{time_ago_in_words(entry.event_at)} ago"
     %br/
     = entry
