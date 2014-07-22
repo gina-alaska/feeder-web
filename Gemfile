@@ -36,7 +36,7 @@ gem 'unicorn', group: :production
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-group :test do
+group :development do
   gem 'rake'
   gem 'minitest', '~> 5.0'
   gem 'minitest-reporters'
