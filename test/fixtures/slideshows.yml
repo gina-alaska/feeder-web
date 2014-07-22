@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+barrow:
+  title: Barrow
+  uid: abc123
+
+barrow_highlights:
+  title: Barrow Highlights
+  uid: ghi123
+  highlights_only: true
+
+modis:
+  title: Modis
+  uid: def123

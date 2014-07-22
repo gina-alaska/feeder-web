@@ -12,6 +12,10 @@ class Entry < ActiveRecord::Base
   has_many :users, through: :stars
 
   belongs_to :feed
+  belongs_to :highlight
+
+  scope :recent, -> { available.order(uid: :desc) }
+  scope :highlighted, -> { where.not(highlight: nil) }
 
   aasm do
     state :waiting, :initial => true
@@ -39,8 +43,12 @@ class Entry < ActiveRecord::Base
     self.stars.where(user: user).any?
   end
 
+  def to_s
+    event_at
+  end
+
   private
   def generate_uid
-    self.uid = "#{event_at.to_i}#{id % 1000}".to_i if uid.nil?
+    self.uid = "#{event_at.to_i}#{"%03i" % (id % 1000)}".to_i if uid.nil?
   end
 end

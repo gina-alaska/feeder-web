@@ -2,11 +2,19 @@ require 'test_helper'
 
 class FeedsControllerTest < ActionController::TestCase
   setup do
-    @feed = feeds(:one)
+    @feed = feeds(:barrow_webcam)
+    @user = users(:admin)
+    session[:user_id] = @user.id
   end
 
-  test "should get index" do
+  test "should get html index" do
     get :index
+    assert_response :success
+    assert_not_nil assigns(:feeds)
+  end
+  
+  test "should get json index" do
+    get :index, format: :json
     assert_response :success
     assert_not_nil assigns(:feeds)
   end
@@ -18,7 +26,7 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should create feed" do
     assert_difference('Feed.count') do
-      post :create, feed: {  }
+      post :create, feed: { title: 'Testing', description: 'Some Feed', author: 'MyString', location: 'MyString' }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
@@ -28,6 +36,11 @@ class FeedsControllerTest < ActionController::TestCase
     get :show, id: @feed
     assert_response :success
   end
+  
+  test "should show empty feed" do
+    get :show, id: feeds(:barrow_radar)
+    assert_response :success
+  end
 
   test "should get edit" do
     get :edit, id: @feed
@@ -35,7 +48,7 @@ class FeedsControllerTest < ActionController::TestCase
   end
 
   test "should update feed" do
-    patch :update, id: @feed, feed: {  }
+    patch :update, id: @feed, feed: { title: 'Testing2' }
     assert_redirected_to feed_path(assigns(:feed))
   end
 

@@ -1,0 +1,10 @@
+development:
+  adapter: postgresql
+  database: feeder-web
+  username: feeder-web_dev
+  client_encoding: UTF8
+test:
+  adapter: postgresql
+  database: travis_ci_test
+  username: postgres
+  client_encoding: UTF8

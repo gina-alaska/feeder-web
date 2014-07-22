@@ -1,0 +1,7 @@
+= bootstrap_form_for(@highlight, url: entry_highlights_path(@entry)) do |f|
+  = f.alert_message "Please fix the errors below."
+  = f.text_area :description, rows: 2
+  .pull-right.form-group
+    = link_to @entry, class: 'btn btn-default' do
+      Cancel
+    = f.primary

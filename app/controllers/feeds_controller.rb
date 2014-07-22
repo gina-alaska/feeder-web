@@ -1,10 +1,11 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy, :more_info]
-
+  load_and_authorize_resource
+  
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.all
+    @feeds = Feed.order(title: :asc)
   end
 
   # GET /feeds/1
@@ -75,6 +76,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params[:feed]
+      params.require(:feed).permit(:title, :description, :author, :location)
     end
 end

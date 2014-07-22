@@ -1,15 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: Feed1
+barrow_webcam:
+  title: Barrow Webcam
   description: Some Feed
   author: MyString
   status: 'online'
   author: MyString
   location: MyString
 
-two:
-  title: Feed2
+barrow_radar:
+  title: Barrow Radar
+  description: MyText
+  author: MyString
+  status: 'not online'
+  author: MyString
+  location: MyString
+
+highlights:
+  type: HighlightFeed
+  title: Barrow Radar
   description: MyText
   author: MyString
   status: 'not online'

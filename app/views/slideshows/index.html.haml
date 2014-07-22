@@ -1,0 +1,11 @@
+%h1 
+  Listing slideshows
+  = link_to new_slideshow_path, class: 'btn btn-success pull-right' do
+    %i.fa.fa-plus
+    New Slideshow
+- @slideshows.each do |slideshow|
+  = link_to slideshow, class: 'thumbnail pull-left' do
+    %h4.text-center= slideshow
+    = image_tag slideshow.entries.recent.first.image.thumb('200x200#').url if slideshow.entries.recent.any?
+    %h1.text-center
+      = slideshow.uid.upcase
