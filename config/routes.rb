@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :slideshows do
+    get :carousel, on: :member
     resources :entries, only: [:index]
   end
 

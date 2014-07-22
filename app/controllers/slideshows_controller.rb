@@ -1,5 +1,5 @@
 class SlideshowsController < ApplicationController
-  before_action :set_slideshow, only: [:show, :edit, :update, :destroy, :add, :remove]
+  before_action :set_slideshow, only: [:show, :edit, :update, :destroy, :add, :remove, :carousel]
   load_and_authorize_resource
 
   # GET /slideshows
@@ -39,6 +39,10 @@ class SlideshowsController < ApplicationController
         redirect_via_turbolinks_to @slideshow
       }
     end
+  end
+  
+  def carousel
+    @entries = @slideshow.entries.recent.limit(12)
   end
 
   # GET /slideshows/1

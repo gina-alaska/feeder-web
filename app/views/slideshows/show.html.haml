@@ -26,9 +26,15 @@
           %dt Only shows highlights?
           %dd= @slideshow.highlights_only? ? 'Yes' : 'No'
           
-        = link_to edit_slideshow_path(@slideshow), class: 'btn btn-default btn-block' do
-          %i.fa.fa-gears
-          Change Settings
+        .row
+          .col-lg-6.col-md-6.col-sm-6
+            = link_to carousel_slideshow_path(@slideshow), class: 'btn btn-primary btn-block' do
+              %i.fa.fa-eye
+              View
+          .col-lg-6.col-md-6.col-sm-6
+            = link_to edit_slideshow_path(@slideshow), class: 'btn btn-default btn-block' do
+              %i.fa.fa-gears
+              Change Settings
       %ul.list-group
         %li.list-group-item Feeds:
         - @active_feeds.each do |feed|

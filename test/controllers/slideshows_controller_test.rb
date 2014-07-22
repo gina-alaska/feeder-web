@@ -17,6 +17,13 @@ class SlideshowsControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
+  
+  test "should get carousel" do
+    get :carousel, id: @slideshow
+    
+    assert_not_nil assigns(:entries)
+    assert_response :success
+  end
 
   test "should create slideshow" do
     assert_difference('Slideshow.count') do

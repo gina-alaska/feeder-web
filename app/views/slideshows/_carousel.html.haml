@@ -1,21 +1,27 @@
 - unless entries.empty?
-  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel' } }
+  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel' }, style: 'max-width: 1680px; margin: 0 auto;' }
     %ol.carousel-indicators
       - entries.count.times do |i|
         %li{ class: (i==0 ? 'active' : ''), data: { target: '#slideshow-carousel', slide_to: i } }
     .carousel-inner
       - entries.each do |entry|
         .item{ class: (entries.first == entry ? 'active' : '') }
-          = image_tag entry.image.thumb('1020x500#').url, alt: entry.title
+          = image_tag entry.image.thumb('1680x1050>').url, alt: entry.title
           .carousel-caption
             %h3
               = entry.feed.title
               - if entry.highlight.present?
                 %i.fa.fa-star.highlight{ title: entry.highlight.description, data: { behavior: 'tooltip' } }
                 
-            %p= entry.event_at
+            %p
+              = link_to entry do
+                = entry.event_at
+                = "(#{time_ago_in_words(entry.event_at)} ago)"
     %a.left.carousel-control{ href: '#slideshow-carousel', role: "button", data: { slide: "prev" } }
       %span.glyphicon.glyphicon-chevron-left
     %a.right.carousel-control{ href: '#slideshow-carousel', role: "button", data: { slide: "next" } }
       %span.glyphicon.glyphicon-chevron-right
-  
+  :javascript
+    $(document).one('page:load', function() {
+      $("#slideshow-carousel").carousel();
+    })
