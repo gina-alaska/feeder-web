@@ -7,7 +7,7 @@
     - unless feed.preview.highlight.nil?
       %i.fa.fa-star.highlight{ title: feed.preview.highlight, data: { behavior: 'tooltip' } }
     
-    = "Processed #{time_ago_in_words(feed.preview.event_at)}"
+    = "Processed #{time_ago_in_words(feed.preview.event_at)} ago"
     %br/
     = feed.preview
 
