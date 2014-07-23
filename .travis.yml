@@ -1,10 +1,14 @@
 language: ruby
 rvm:
-  - 2.1.1
-  - 1.9.3
+- 2.1.1
+- 1.9.3
 cache: bundler
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+notifications:
+  campfire:
+    rooms:
+      secure: KxVj7kGLUd8tPoGNHb+Fv8gqqgmQ6ips9ydsYmnoSgn4GzOZDepytPpqpSydRc3lYRWgzT9mkDLtdPVFN53u3C2CER15XxMF+0hKOgx4ADbRMZsofbi2tMu4kfJjE41F1G3r17kOriIV3MBs8IFEHIJk2TplBLx1hmsbnOQYz8Q=
