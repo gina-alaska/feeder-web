@@ -1,6 +1,12 @@
 class SlideshowsController < ApplicationController
   before_action :set_slideshow, only: [:show, :edit, :update, :destroy, :add, :remove, :carousel]
+  before_action :set_device_type
+  
   load_and_authorize_resource
+
+  def set_device_type
+    request.variant = :phone if browser.mobile?
+  end
 
   # GET /slideshows
   # GET /slideshows.json
@@ -43,6 +49,13 @@ class SlideshowsController < ApplicationController
   
   def carousel
     @entries = @slideshow.entries.recent.limit(12)
+    
+    respond_to do |format|
+      format.html
+      format.html.phone {
+        render layout: 'mobile'
+      }
+    end
   end
 
   # GET /slideshows/1

@@ -58,6 +58,7 @@ gem "friendly_id"
 gem "sidekiq"
 gem "aasm"
 gem 'sinatra', require: false
+gem 'browser'
 
 group :development do
   gem 'guard-minitest'

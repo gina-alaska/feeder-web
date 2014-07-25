@@ -45,6 +45,7 @@ GEM
       kaminari (>= 0.13)
       rails (>= 3.1)
     bootstrap_form (2.1.1)
+    browser (0.6.0)
     builder (3.2.2)
     bunny (0.7.9)
     cancancan (1.8.4)
@@ -335,6 +336,7 @@ DEPENDENCIES
   bootstrap-kaminari-views
   bootstrap_form
   bower-tools!
+  browser
   cancancan (~> 1.8)
   capistrano (~> 3.0)
   capistrano-bundler
