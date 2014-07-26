@@ -5,7 +5,7 @@ class SlideshowsController < ApplicationController
   load_and_authorize_resource
 
   def set_device_type
-    if browser.mobile? or browser.tablet?
+    if browser.mobile? or browser.tablet? or params[:mobile].present?
       request.variant = :phone 
     end
   end

@@ -1,13 +1,13 @@
 - variant_class ||= 'desktop'
 - unless entries.empty?
-  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel', class: variant_class } }
+  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel' }, class: variant_class }
     %ol.carousel-indicators
       - entries.count.times do |i|
         %li{ class: (i==0 ? 'active' : ''), data: { target: '#slideshow-carousel', slide_to: i } }
     .carousel-inner
       - entries.each do |entry|
         .item{ class: (entries.first == entry ? 'active' : '') }
-          = image_tag entry.image.thumb('1680x1050>').url, alt: entry.title
+          = image_tag entry.image.thumb('1280x800>').url, alt: entry.event_at
           .carousel-caption
             %h3
               = entry.feed.title
