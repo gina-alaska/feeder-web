@@ -1,5 +1,6 @@
+- variant_class ||= 'desktop'
 - unless entries.empty?
-  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel' }, style: 'max-width: 1680px; margin: 0 auto;' }
+  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel', class: variant_class } }
     %ol.carousel-indicators
       - entries.count.times do |i|
         %li{ class: (i==0 ? 'active' : ''), data: { target: '#slideshow-carousel', slide_to: i } }
