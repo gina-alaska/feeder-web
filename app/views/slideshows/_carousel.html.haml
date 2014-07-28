@@ -25,7 +25,17 @@
       %span.glyphicon.glyphicon-chevron-right
   :javascript
     $(document).one('page:load', function() {
-      $("#slideshow-carousel").carousel({
-        pause: false
+      $("#slideshow-carousel").carousel();
+    })
+    
+    $(document).one('ready', function() {
+      $("#slideshow-carousel").on('slide.bs.carousel', function(e) {
+        if (e.direction != 'left') {
+          // don't do anything when sliding back
+          return;
+        }
+        if ($(this).find('.item:last').hasClass('active')) {
+          location.reload()
+        }
       });
     })
