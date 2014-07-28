@@ -7,7 +7,8 @@
     .carousel-inner
       - entries.each do |entry|
         .item{ class: (entries.first == entry ? 'active' : '') }
-          = image_tag entry.image.thumb('1280x800>').url, alt: entry.event_at
+          - thumb = entry.image.thumb('1280x800>')
+          = image_tag thumb.url, alt: entry.event_at
           .carousel-caption
             %h3
               = entry.feed.title
