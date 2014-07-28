@@ -1,6 +1,6 @@
 - variant_class ||= 'desktop'
 - unless entries.empty?
-  #slideshow-carousel.carousel.slide{ data: { ride: 'carousel', pause: 'false', interval: 12000 }, class: variant_class }
+  #slideshow-carousel.carousel.slide{ data: { pause: 'false', interval: 10000, wrap: false }, class: variant_class }
     %ol.carousel-indicators
       - entries.count.times do |i|
         %li{ class: (i==0 ? 'active' : ''), data: { target: '#slideshow-carousel', slide_to: i } }
@@ -24,18 +24,21 @@
     %a.right.carousel-control{ href: '#slideshow-carousel', role: "button", data: { slide: "next" } }
       %span.glyphicon.glyphicon-chevron-right
   :javascript
-    $(document).one('page:load', function() {
+    $(document).ready(function() {
       $("#slideshow-carousel").carousel();
-    })
-    
-    $(document).one('ready', function() {
-      $("#slideshow-carousel").on('slide.bs.carousel', function(e) {
-        if (e.direction != 'left') {
-          // don't do anything when sliding back
-          return;
-        }
-        if ($(this).find('.item:last').hasClass('active')) {
-          location.reload()
-        }
-      });
+    });
+    $(document).on('slide.bs.carousel', function(e) {
+      if (e.direction != 'left') {
+        // don't do anything when sliding back
+        return;
+      }
+      if ($(this).find('.item:last').hasClass('active')) {
+      
+        Turbolinks.visit(location.path);
+      }
+    });
+    $(document).one('page:fetch', function() {
+      // disable previous slideshow instance
+      $(document).off('slide.bs.carousel');
+      $("#slideshow-carousel").remove();
     })
