@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default.navbar-static-top
+%nav.navbar.navbar-gina.navbar-static-top
   .container-fluid
     .navbar-header
       %button.navbar-toggle{ data: { toggle: 'collapse', target: '#header-navbar' }}
@@ -7,7 +7,9 @@
         %span.icon-bar        
         %span.icon-bar
       = link_to root_url, class: 'navbar-brand' do
-        GINA Puffin Feeder
+        = image_tag 'ic_launcher.png'
+        %span.gina GINA 
+        Puffin Feeder
     #header-navbar.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         - if signed_in?
