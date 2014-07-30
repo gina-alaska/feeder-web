@@ -9,6 +9,6 @@
     
   showUI: (duration=300) ->
     $('.carousel-control').fadeIn(duration)
-    
+    $('.carousel-control').removeClass('hidden')
 }
   
