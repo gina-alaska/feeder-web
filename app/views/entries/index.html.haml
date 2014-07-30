@@ -1,13 +1,14 @@
 .row-fluid
   .col-lg-3.col-md-3.col-sm-4
-    - unless @source.nil?
-      = render 'feed_select', source: @source
-      %br/
-  - unless @source.entries.available.empty?
-    #calendar.panel.panel-default
-      .panel-heading 
-        Pick a date
-      %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @source.entries.available.order(event_at: :asc).last.event_at.to_date, date_start_date: @source.entries.available.order(event_at: :asc).first.event_at.to_date } }
+    .sidebar{ style: 'width: 250px;', data: { spy: 'affix', offset_top: 60 } }
+      - unless @source.nil?
+        = render 'feed_select', source: @source
+        %br/
+      - unless @source.entries.available.empty?
+        #calendar.panel.panel-default
+          .panel-heading
+            Pick a date
+          %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @source.entries.available.order(event_at: :asc).last.event_at.to_date, date_start_date: @source.entries.available.order(event_at: :asc).first.event_at.to_date } }
   .col-lg-9.col-md-9.col-sm-8
     - if @entries.count == 0
       %h1.text-center No available feed items
@@ -17,7 +18,7 @@
     .text-center
       - @entries.each do |entry|
         = render entry
-    
+
     - if @paginated
       .clearfix.text-center
         = paginate @entries, :theme => 'twitter-bootstrap-3'

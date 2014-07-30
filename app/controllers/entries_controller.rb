@@ -1,24 +1,26 @@
 class EntriesController < ApplicationController
   MAX_ENTRIES = 100
-
+  before_action :set_device_type
   before_action :set_entry, only: [:show]
   before_action :set_entries, only: [:index]
   after_action :set_page_headers, only: [:index]
   skip_before_action :verify_authenticity_token, only: [:create]
-  
+
   respond_to :html, :json
+
+
 
   # GET /entries
   # GET /entries.json
   def index
     @paginated = false
     @entries = @entries.recent.order(uid: :desc)
-    
+
     @source = @feed || @slideshow
-    
+
     @calendar_date = Date.parse(params[:date]) if params[:date].present?
     @calendar_date ||= Time.zone.now
-    
+
     if params[:slideshow_id].present?
       # slideshow
       @entries = @entries.limit(12)
@@ -26,7 +28,7 @@ class EntriesController < ApplicationController
       # continuous scrolling!
       @entries = @entries.where('uid < ?', params[:max_id]) if params[:max_id].present?
       @entries = @entries.where('uid > ?', params[:since_id]) if params[:since_id].present?
-      @entries = @entries.limit(entries_limit)    
+      @entries = @entries.limit(entries_limit)
     elsif params[:date].present?
       # calendar based viewing
       @paginated = true
@@ -35,13 +37,20 @@ class EntriesController < ApplicationController
       @paginated = true
       @entries = @entries.page(params[:page]).per(entries_limit)
     end
-    
+
     respond_with @entries
   end
 
   # GET /entries/1
   # GET /entries/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.html.phone {
+        render layout: 'mobile'
+      }
+      format.json
+    end
   end
 
   # POST /entries
@@ -64,14 +73,14 @@ class EntriesController < ApplicationController
 
     def set_entries
       if params[:feed_id].present?
-        @feed = Feed.friendly.find(params[:feed_id]) 
+        @feed = Feed.friendly.find(params[:feed_id])
         @entries = @feed.entries
       elsif params[:slideshow_id].present?
         @slideshow = Slideshow.find_by_uid(params[:slideshow_id])
         @entries = @slideshow.entries
       end
     end
-    
+
     def set_slideshow
       @slideshow = Slideshow.find_uid(params[:slideshow_id]) if params[:slideshow_id].present?
     end
@@ -100,5 +109,4 @@ class EntriesController < ApplicationController
         response.headers['X-Previous-Entries'] = slideshow_entries_url(@slideshow, header_params)
       end
     end
-
 end

@@ -1,14 +1,8 @@
 class SlideshowsController < ApplicationController
   before_action :set_slideshow, only: [:show, :edit, :update, :destroy, :add, :remove, :carousel]
   before_action :set_device_type
-  
-  load_and_authorize_resource
 
-  def set_device_type
-    if browser.mobile? or browser.tablet? or params[:mobile].present?
-      request.variant = :phone 
-    end
-  end
+  load_and_authorize_resource
 
   # GET /slideshows
   # GET /slideshows.json
@@ -19,7 +13,7 @@ class SlideshowsController < ApplicationController
   def add
     @feed = Feed.friendly.find(params[:feed_id])
     @slideshow.feeds << @feed unless @slideshow.feeds.include?(@feed)
-    
+
     msg = "Added #{@feed} to slideshow"
     respond_to do |format|
       format.html {
@@ -32,7 +26,7 @@ class SlideshowsController < ApplicationController
       }
     end
   end
-  
+
   def remove
     @feed = Feed.friendly.find(params[:feed_id])
     @slideshow.feeds.destroy(@feed)
@@ -48,10 +42,10 @@ class SlideshowsController < ApplicationController
       }
     end
   end
-  
+
   def carousel
     @entries = @slideshow.entries.recent.limit(12)
-    
+
     respond_to do |format|
       format.html
       format.html.phone {
@@ -64,7 +58,7 @@ class SlideshowsController < ApplicationController
   # GET /slideshows/1.json
   def show
     @entries = @slideshow.entries.recent.limit(12)
-    
+
     @active_feeds = @slideshow.feeds.order(title: :asc)
     @available_feeds = Feed.where.not(id: @slideshow.feed_ids).order(title: :asc)
   end
@@ -119,7 +113,7 @@ class SlideshowsController < ApplicationController
   end
 
   protected
-  
+
     # Use callbacks to share common setup or constraints between actions.
     def set_slideshow
       @slideshow = Slideshow.find_by_uid(params[:id].downcase)
