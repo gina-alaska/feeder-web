@@ -55,7 +55,8 @@ end
 
 gem 'nested_form'
 gem 'bootstrap_form'
-
+gem 'dalli'
+gem 'rack-cache', require: 'rack/cache'
 gem "pg"
 gem "haml"
 gem "bower-tools", github: "gina-alaska/bower-tools"

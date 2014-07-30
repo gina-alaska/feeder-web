@@ -31,7 +31,9 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
-
+  
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.cache_store = :dalli_store, 'cache-wrrb0.x.gina.alaska.edu', 'cache-iarc0.x.gina.alaska.edu',
+    { :namespace => 'feeder_web_development', pool_size: 5 }
 end
