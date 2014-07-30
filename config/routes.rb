@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   resources :feeds do
     get :more_info
     
-    resources :entries, shallow: true
+    resources :entries, only: [:new, :index, :create, :show], constraints: { id: /.*/ } do
+    end
     
     resources :slideshows, only: [:add, :remove] do
       member do
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :entries, only:[] do
+  resources :entries, only:[:show,:update,:edit] do
     resource :highlights
   end
 
