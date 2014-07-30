@@ -42,6 +42,15 @@ group :development do
   gem 'rake'
   gem 'minitest', '~> 5.0'
   gem 'minitest-reporters'
+  gem 'guard-minitest'
+  gem 'capistrano', '~> 3.0'
+  gem 'capistrano-chruby'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-chef'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem "pry-rails"  
 end
 
 gem 'nested_form'
@@ -62,14 +71,3 @@ gem "aasm"
 gem 'sinatra', require: false
 gem 'browser'
 
-group :development do
-  gem 'guard-minitest'
-  gem 'capistrano', '~> 3.0'
-  gem 'capistrano-chruby'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-chef'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem "pry-rails"
-end
