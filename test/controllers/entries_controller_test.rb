@@ -8,18 +8,15 @@ class EntriesControllerTest < ActionController::TestCase
     @entry = @feed.entries.first
   end
 
-  test "should get list of entries for feeds" do    
+  test "should get list of entries for feeds" do
     get :index, feed_id: @feed
     assert_response :success
     assert_not_nil assigns(:entries)
   end
-  
+
   test "should render feed with no entries" do
     get :index, feed_id: feeds(:empty_feed)
-    
-    assert_response :success
-    assert_not_nil
-    get :index, slideshow_id: @slideshow, format: :json
+
     assert_response :success
     assert_not_nil assigns(:entries)
   end
