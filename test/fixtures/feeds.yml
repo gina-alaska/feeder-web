@@ -16,6 +16,14 @@ barrow_radar:
   author: MyString
   location: MyString
 
+empty_feed:
+  title: Empty Feed
+  description: MyText
+  author: MyString
+  status: 'online'
+  author: MyString
+  location: MyString
+
 highlights:
   type: HighlightFeed
   title: Barrow Radar

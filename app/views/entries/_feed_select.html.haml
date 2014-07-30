@@ -1,12 +1,12 @@
 .dropdown
   %button.btn.btn-default.btn-block.btn-lg{ data: { toggle: 'dropdown' } }
-    = image_tag source.preview.image.thumb('25x25#').url
+    = image_tag source.preview.image.thumb('25x25#').url unless source.preview.nil?
     = source
     %span.caret
 
   %ul.dropdown-menu{ role: 'menu', style: 'width: 100%;' }
     - source.class.all.each do |feed|
-      - next if feed.entries.recent.count == 0
+      - next if feed.entries.recent.empty?
       %li{ class: feed == source ? 'active' : '', style: 'min-height: 31px;' }
         = link_to [feed, :entries], style: 'font-size: 1.1em; line-height: 1.1em;' do
           = image_tag feed.preview.image.thumb('25x25#').url, size: '25x25'

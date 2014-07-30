@@ -29,7 +29,7 @@ class FeedsControllerTest < ActionController::TestCase
       post :create, feed: { title: 'Testing', description: 'Some Feed', author: 'MyString', location: 'MyString' }
     end
 
-    assert_redirected_to feed_path(assigns(:feed))
+    assert_redirected_to feed_entries_path(assigns(:feed))
   end
 
   test "should show feed" do
@@ -38,7 +38,7 @@ class FeedsControllerTest < ActionController::TestCase
   end
   
   test "should show empty feed" do
-    get :show, id: feeds(:barrow_radar)
+    get :show, id: feeds(:empty_feed)
     assert_response :success
   end
 
@@ -49,7 +49,7 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should update feed" do
     patch :update, id: @feed, feed: { title: 'Testing2' }
-    assert_redirected_to feed_path(assigns(:feed))
+    assert_redirected_to feed_entries_path(assigns(:feed))
   end
 
   test "should destroy feed" do

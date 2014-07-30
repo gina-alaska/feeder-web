@@ -50,7 +50,7 @@
                 Remove from slideshow
         - if can? :manage, @slideshow
           - @available_feeds.each do |feed|
-            - next if feed.class == HighlightFeed
+            - next if feed.class == HighlightFeed or feed.entries.empty?
             %li.list-group-item.clearfix
               .pull-left
                 = link_to [feed, :entries], target: :_blank do
