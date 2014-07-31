@@ -1,6 +1,6 @@
 .row-fluid
   .col-lg-3.col-md-3.col-sm-4
-    .sidebar{ style: 'width: 250px;', data: { spy: 'affix', offset_top: 60 } }
+    .sidebar{ data: { spy: 'affix', offset_top: 60 } }
       - unless @source.nil?
         = render 'feed_select', source: @source
         %br/
