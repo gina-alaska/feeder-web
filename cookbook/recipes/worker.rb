@@ -2,7 +2,7 @@ include_recipe 'feeder-web::application'
 
 app_name = "feeder-web"
 
-template "/etc/init.d/sidekiq_#{app_name}" do
+template "/etc/init.d/sidekiq" do
   source "sidekiq_init.erb"
   action :create
   mode 00755
@@ -38,6 +38,16 @@ template ::File.join(node[app_name]['paths']['config'], 'sidekiq.yml') do
   })
 end
 
-service "sidekiq_#{app_name}" do
+service "sidekiq" do
   action node[app_name]['sidekiq']['action']
 end
+
+service "sidekiq_#{app_name}" do
+  action [:stop, :disable]
+end
+
+
+file "/etc/init.d/sidekiq_#{app_name}" do
+  action :delete
+end
+

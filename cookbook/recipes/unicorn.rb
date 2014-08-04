@@ -25,7 +25,7 @@ unicorn_config node[app_name]['unicorn']['config_path'] do
   after_fork node[app_name]['unicorn']['after_fork']
 end
 
-template "/etc/init.d/unicorn_#{app_name}" do
+template "/etc/init.d/unicorn" do
   source "unicorn_init.erb"
   action :create
   mode 00755
@@ -40,6 +40,14 @@ template "/etc/init.d/unicorn_#{app_name}" do
   })
 end
 
+service "unicorn" do
+  action [:enable, :start]
+end
+
 service "unicorn_#{app_name}" do
-  action [:enable]
+  action [:stop, :disable]
+end
+
+file "/etc/init.d/unicorn_#{app_name}" do
+  action :delete
 end

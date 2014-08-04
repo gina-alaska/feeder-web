@@ -38,7 +38,9 @@ start() {
 
 stop() {
     echo -n $"Stopping $prog: "
-    killproc -p ${pidfile} ${prog} -QUIT
+    # killproc -p ${pidfile} ${prog} -QUIT
+    su - <%=@user %> -c "cd $RAILS_ROOT && chruby-exec <%=@ruby_version %> -- bundle exec sidekiqctl stop ${pidfile} 60"
+    
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && rm -f ${lockfile} ${pidfile}
