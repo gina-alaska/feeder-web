@@ -15,5 +15,5 @@
         %i.fa.fa-download
         Download
 
-  .panel-body.text-center{ style: 'padding:0;' }
-    = image_tag @entry.image.remote_url, style: 'max-width: 100%;'
+  .panel-body.image-list.text-center{ style: 'padding:0;' }
+    %li.is-loading= image_tag @entry.image.remote_url, style: 'max-width: 100%;'

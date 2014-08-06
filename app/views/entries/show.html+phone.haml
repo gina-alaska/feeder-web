@@ -1,3 +1,4 @@
 %table.entry.mobile
   %tr
-    %td= image_tag @entry.image.remote_url
+    %td.image-list
+      %li.is-loading= image_tag @entry.image.remote_url
