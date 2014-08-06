@@ -39,6 +39,10 @@
   width: 300px;
 }
 
+.entry img {
+  background-color: black;
+}
+
 .entry.mobile {
    height:100%;
    width: 100%;
@@ -50,4 +54,46 @@
       vertical-align: middle;
       text-align: center;
    }
+}
+
+.image-list {
+  padding:0;
+  margin:0;
+  
+  li {
+    height: 200px;
+    min-width: 200px;
+    display: block;
+    float: left;
+    list-style: none;
+    margin: 0;
+    background-color: black;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  li img {
+    -webkit-transition: opacity 0.4s;
+       -moz-transition: opacity 0.4s;
+        -ms-transition: opacity 0.4s;
+            transition: opacity 0.4s;
+  }
+  
+  li.is-loading {
+    background-color: black;
+    background-image: image-url("loading.gif");
+  }
+  
+  li.is-broken {
+    background-color: #be3730;
+    background-image: image-url("broken.png");
+  }
+  
+  li.is-loading img, li.is-broken img {
+    opacity: 0;
+  }
+  
+  li.is-broken {
+    
+  }
 }

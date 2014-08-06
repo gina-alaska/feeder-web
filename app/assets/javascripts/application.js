@@ -15,5 +15,6 @@
 //= require bootstrap/dist/js/bootstrap
 //= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require moment/moment
+//= require imagesloaded/imagesloaded.pkgd
 //= require turbolinks
 //= require_tree .

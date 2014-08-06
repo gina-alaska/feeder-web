@@ -15,7 +15,7 @@
     - if @paginated
       .clearfix.text-center
         = paginate @entries, :theme => 'twitter-bootstrap-3'
-    .text-center
+    .text-center.image-list
       - @entries.each do |entry|
         = render entry
 

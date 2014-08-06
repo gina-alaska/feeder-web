@@ -1,5 +1,6 @@
 = link_to [entry], class: 'thumbnail pull-left text-center entry-thumb' do
-  = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
+  %li.is-loading
+    = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
 
   %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
     - unless entry.highlight.nil?
