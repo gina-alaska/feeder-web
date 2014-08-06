@@ -1,12 +1,14 @@
-= link_to [feed, :entries], class: 'thumbnail pull-left text-center entry-thumb' do
-  %h4= feed
+- unless feed.preview_entry.nil?
+  = link_to [feed, :entries], class: 'thumbnail pull-left text-center entry-thumb' do
+    %h4= feed
     
-  %li.is-loading= image_tag feed.preview.preview.thumb('200x200#').url, size: '200x200'
+    %li.is-loading
+      = image_tag feed.preview_entry.preview.try(:thumb, '200x200#').try(:url), size: '200x200'
 
-  %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
-    - unless feed.preview.highlight.nil?
-      %i.fa.fa-star.highlight{ title: feed.preview.highlight, data: { behavior: 'tooltip' } }
+    %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
+      - unless feed.preview_entry.highlight.nil?
+        %i.fa.fa-star.highlight{ title: feed.preview_entry.highlight, data: { behavior: 'tooltip' } }
     
-    = feed.preview
-    %br/
-    = "#{time_ago_in_words(feed.preview.event_at)} ago"
+      = feed.preview_entry
+      %br/
+      = "#{time_ago_in_words(feed.preview_entry.event_at)} ago"

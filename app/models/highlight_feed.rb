@@ -3,7 +3,7 @@ class HighlightFeed < Feed
   self.param_key = :feed
   self.route_key = :feeds
    
-  def preview
+  def preview_entry
     entries.first
   end 
    

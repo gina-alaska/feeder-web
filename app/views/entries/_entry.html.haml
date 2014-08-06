@@ -1,11 +1,12 @@
-= link_to [entry], class: 'thumbnail pull-left text-center entry-thumb' do
-  %li.is-loading
-    = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
+- unless entry.preview.nil?
+  = link_to [entry], class: 'thumbnail pull-left text-center entry-thumb' do
+    %li.is-loading
+      = image_tag entry.preview.thumb('200x200#').url, size: '200x200'
 
-  %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
-    - unless entry.highlight.nil?
-      %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
+    %p{ style: 'margin-top: 5px; margin-bottom: 0;' }
+      - unless entry.highlight.nil?
+        %i.fa.fa-star.highlight{ title: entry.highlight, data: { behavior: 'tooltip' } }
 
-    = entry
-    %br/
-    = "#{time_ago_in_words(entry.event_at)} ago"
+      = entry
+      %br/
+      = "#{time_ago_in_words(entry.event_at)} ago"

@@ -12,7 +12,7 @@ class Feed < ActiveRecord::Base
   
   belongs_to :category
 
-  def preview
+  def preview_entry
     entries.recent.first
   end
 

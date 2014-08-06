@@ -1,4 +1,4 @@
 %table.entry.mobile
   %tr
     %td.image-list
-      %li.is-loading= image_tag @entry.image.remote_url
+      = render "full_entry", entry: @entry

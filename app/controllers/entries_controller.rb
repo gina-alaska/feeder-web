@@ -59,7 +59,7 @@ class EntriesController < ApplicationController
     if params[:type] == "create"
       entry = Entry.new(entry_params)
       if entry.save
-        FetchEntryWorker.perform_async(entry.id)
+        entry.async_fetch
       end
     end
     render json: {success: true}, status: 200

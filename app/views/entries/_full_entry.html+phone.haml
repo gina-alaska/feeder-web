@@ -1,0 +1,4 @@
+- if entry.feed.category.name == 'Movie'
+  = render 'movie_entry', entry: entry
+- else
+  = render "image_entry", entry: entry

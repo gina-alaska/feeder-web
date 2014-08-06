@@ -17,7 +17,7 @@ class Slideshow < ActiveRecord::Base
   accepts_nested_attributes_for :feeds
   
   
-  def preview
+  def preview_entry
     self.entries.recent.first
   end
   

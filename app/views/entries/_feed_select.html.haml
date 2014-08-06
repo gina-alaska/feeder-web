@@ -1,6 +1,6 @@
 .dropdown
   %button.btn.btn-default.btn-block.btn-lg{ data: { toggle: 'dropdown' } }
-    = image_tag source.preview.image.thumb('25x25#').url unless source.preview.nil?
+    = image_tag source.preview_entry.image.thumb('25x25#').url unless source.preview_entry.nil?
     = source
     %span.caret
 
@@ -9,7 +9,7 @@
       - next if feed.entries.recent.empty?
       %li{ class: feed == source ? 'active' : '', style: 'min-height: 31px;' }
         = link_to [feed, :entries], style: 'font-size: 1.1em; line-height: 1.1em;' do
-          = image_tag feed.preview.image.thumb('25x25#').url, size: '25x25'
+          = image_tag feed.preview_entry.image.thumb('25x25#').url, size: '25x25'
           = feed
           .badge{ style: 'position: absolute; right: 10px; margin-top: 3px;' }
             = feed.entries.recent.count
