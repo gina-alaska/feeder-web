@@ -1,6 +1,6 @@
 .row-fluid
-  .col-lg-3.col-md-3.col-sm-4
-    .sidebar{ data: { spy: 'affix', offset_top: 60 } }
+  .col-lg-3.col-md-4.col-sm-4
+    .sidebar
       - unless @source.nil?
         = render 'feed_select', source: @source
         %br/
@@ -9,7 +9,7 @@
           .panel-heading
             Pick a date
           %div{ data: { behavior: 'calendar', date: @calendar_date, click: 'reload-entries', date_end_date: @source.entries.available.order(event_at: :asc).last.event_at.to_date, date_start_date: @source.entries.available.order(event_at: :asc).first.event_at.to_date } }
-  .col-lg-9.col-md-9.col-sm-8
+  .col-lg-9.col-md-8.col-sm-8
     - if @entries.count == 0
       %h1.text-center No available feed items
     - if @paginated
