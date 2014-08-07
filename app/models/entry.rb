@@ -22,17 +22,21 @@ class Entry < ActiveRecord::Base
     state :available
 
     event :finish, before: :generate_uid do
-      transitions :from => :waiting, :to => :available
+      transitions :from => [:waiting, :available], :to => :available
     end
   end
 
   extend Dragonfly::Model
   dragonfly_accessor :image do
     copy_to(:image) do |i|
-      if i.format == 'tiff'
-        i.convert("", 'format' => 'jpg', 'frame' => 1)
+      if self.feed.category.name == 'Movie'
+        i.convert("", 'format' => 'jpg', 'frame' => 1, 'delegate' => 'ffmpeg')
       else
-        i.encode(:jpg)
+        if i.format == 'tiff'
+          i.convert("", 'format' => 'jpg', 'frame' => 1)
+        else
+          i.encode(:jpg)
+        end
       end
     end
     copy_to(:preview){|i| i.thumb('5000x5000>')}
@@ -41,6 +45,10 @@ class Entry < ActiveRecord::Base
 
   def starred?(user)
     self.stars.where(user: user).any?
+  end
+  
+  def async_fetch
+    FetchEntryWorker.perform_async(self.id)
   end
 
   def to_s

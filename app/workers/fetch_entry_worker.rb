@@ -5,7 +5,6 @@ class FetchEntryWorker
     e = Entry.find(entry_id)
 
     uid = Dragonfly.app.fetch_url(e.source_url).store
-    
     e.image = Dragonfly.app.fetch(uid)
     e.save
     return false if e.image.nil?

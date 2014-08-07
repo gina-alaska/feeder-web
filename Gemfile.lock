@@ -4,6 +4,16 @@ GIT
   specs:
     bower-tools (0.2.1)
 
+GIT
+  remote: git://github.com/teknofire/dragonfly.git
+  revision: a2eee34817390c511e7d08f75025c282d85ca5d0
+  branch: add_delegate_support
+  specs:
+    dragonfly (1.0.5)
+      addressable (~> 2.3)
+      multi_json (~> 1.0)
+      rack
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -97,9 +107,6 @@ GEM
     colorize (0.7.3)
     connection_pool (2.0.0)
     dalli (2.7.0)
-    dragonfly (1.0.5)
-      multi_json (~> 1.0)
-      rack
     erubis (2.7.0)
     execjs (2.2.1)
     extlib (0.9.16)
@@ -351,7 +358,7 @@ DEPENDENCIES
   capistrano-rails
   coffee-rails (~> 4.0.0)
   dalli
-  dragonfly
+  dragonfly!
   friendly_id
   google-api-client
   guard-minitest

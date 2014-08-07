@@ -65,7 +65,7 @@ gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "omniauth-openid"
 gem "google-api-client"
-gem "dragonfly"
+gem "dragonfly", github: 'teknofire/dragonfly', branch: 'add_delegate_support'
 gem "friendly_id"
 gem "sidekiq"
 gem "aasm"
