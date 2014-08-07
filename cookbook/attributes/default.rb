@@ -3,7 +3,7 @@ default['unicorn_config_path'] = '/etc/unicorn'
 default['feeder-web']['account'] = "webdev"
 default['feeder-web']['environment'] = "production"
 default['feeder-web']['packages'] = %w{
-  ImageMagick-devel
+  ImageMagick-devel gina-ffmpeg
 }
 
 #Path configuration

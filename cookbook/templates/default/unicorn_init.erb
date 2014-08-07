@@ -18,7 +18,7 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-prog=unicorn
+prog=unicorn_rails
 #ruby_home=/opt/ruby-enterprise-1.8.7-2012.02
 RAILS_ROOT="<%= @install_path %>"
 UNICORN_CONF="<%= @unicorn_config_file %>"
@@ -29,8 +29,11 @@ RETVAL=0
 ENV=<%=@environment%>
 
 start() {
+    rh_status && echo >&2 "Already running" && exit 0
+    
     echo -n $"Starting $prog: "
     cd $RAILS_ROOT
+    
     su - <%=@user %> -c "cd $RAILS_ROOT && chruby-exec <%=@ruby_version %> -- bundle exec unicorn_rails -c $UNICORN_CONF -E $ENV -D "
     RETVAL=$?
     echo
@@ -61,7 +64,9 @@ reload() {
 }
 
 rh_status() {
-    status -p ${pidfile} ${prog}
+    test -s "${pidfile}" && kill -0 `cat "${pidfile}"`
+    RETVAL=$?
+    return $RETVAL
 }
 
 # See how we were called.
@@ -75,6 +80,7 @@ case "$1" in
         ;;
     status)
         rh_status
+        status -p $pidfile $prog
         RETVAL=$?
         ;;
     restart)

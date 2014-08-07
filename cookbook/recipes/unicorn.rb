@@ -41,7 +41,7 @@ template "/etc/init.d/unicorn" do
 end
 
 service "unicorn" do
-  action [:enable, :start]
+  action [:enable]
 end
 
 service "unicorn_#{app_name}" do

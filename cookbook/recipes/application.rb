@@ -1,6 +1,7 @@
 app_name = "feeder-web"
 
 include_recipe "feeder-web::packages"
+include_recipe "feeder-web::ffmpeg_delegates_fix"
 include_recipe "feeder-web::ruby"
 include_recipe "postgresql::client"
 
