@@ -5,7 +5,7 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.order(title: :asc)
+    @feeds = Feed.order(title: :asc).online
   end
 
   # GET /feeds/1

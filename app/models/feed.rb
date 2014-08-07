@@ -13,6 +13,8 @@ class Feed < ActiveRecord::Base
   
   belongs_to :category
 
+  scope :online, -> { where(status: 'online') }
+
   def preview_entry
     entries.recent.first
   end
