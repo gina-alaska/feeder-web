@@ -20,7 +20,7 @@ class FeedTest < ActiveSupport::TestCase
   end
 
   test 'generates the correct preview url' do
-    assert_equal(@feed.preview, entries(:entry_two))
+    assert_equal(@feed.preview_entry, entries(:entry_two))
     # feed.preview.must_equal entries(:entry_two), "Used the wrong entry for the preview url"
   end
 

@@ -7,6 +7,7 @@ barrow_webcam:
   status: 'online'
   author: MyString
   location: MyString
+  category: one
 
 barrow_radar:
   title: Barrow Radar
@@ -15,6 +16,7 @@ barrow_radar:
   status: 'not online'
   author: MyString
   location: MyString
+  category: one
 
 empty_feed:
   title: Empty Feed
@@ -23,6 +25,7 @@ empty_feed:
   status: 'online'
   author: MyString
   location: MyString
+  category: one
 
 highlights:
   type: HighlightFeed
@@ -32,3 +35,5 @@ highlights:
   status: 'not online'
   author: MyString
   location: MyString
+  category: one
+  

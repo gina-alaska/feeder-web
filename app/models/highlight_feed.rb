@@ -4,7 +4,7 @@ class HighlightFeed < Feed
   self.route_key = :feeds
    
   def preview_entry
-    entries.first
+    entries.order(event_at: :desc).first
   end 
    
   def entries

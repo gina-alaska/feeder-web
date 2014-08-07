@@ -3,6 +3,7 @@ require 'test_helper'
 class FeedsControllerTest < ActionController::TestCase
   setup do
     @feed = feeds(:barrow_webcam)
+    @category = categories(:one)
     @user = users(:admin)
     session[:user_id] = @user.id
   end
@@ -26,7 +27,8 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should create feed" do
     assert_difference('Feed.count') do
-      post :create, feed: { title: 'Testing', description: 'Some Feed', author: 'MyString', location: 'MyString' }
+      post :create, feed: { title: 'Testing', description: 'Some Feed', author: 'MyString', location: 'MyString', category_id: @category.id }
+      assert assigns(:feed).errors.empty?, assigns(:feed).errors.full_messages
     end
 
     assert_redirected_to feed_entries_path(assigns(:feed))

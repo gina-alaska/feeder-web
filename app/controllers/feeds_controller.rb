@@ -76,6 +76,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.require(:feed).permit(:title, :description, :author, :location)
+      params.require(:feed).permit(:title, :description, :author, :location, :category_id)
     end
 end
