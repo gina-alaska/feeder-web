@@ -54,7 +54,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
   config.cache_store = :dalli_store, 'cache-wrrb0.x.gina.alaska.edu', 'cache-iarc0.x.gina.alaska.edu',
-    { :namespace => 'feeder_web_production', pool_size: 5 }
+    { :namespace => 'feeder_web_production', pool_size: 5, value_max_bytes: 1024*1024*10 }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
