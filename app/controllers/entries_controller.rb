@@ -8,8 +8,6 @@ class EntriesController < ApplicationController
 
   respond_to :html, :json
 
-
-
   # GET /entries
   # GET /entries.json
   def index
@@ -45,13 +43,14 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     respond_to do |format|
-      format.html {
+      format.html.phone {
         if @entry.feed.category.name.downcase == 'movie'
           redirect_to @entry.source_url
+        else
+          render layout: 'mobile'
         end
       }
-      format.html.phone {
-        render layout: 'mobile'
+      format.html {
       }
       format.json
     end
