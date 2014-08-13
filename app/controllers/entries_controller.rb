@@ -14,7 +14,7 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @paginated = false
-    @entries = @entries.recent.order(uid: :desc)
+    @entries = @entries.recent
 
     @source = @feed || @slideshow
 
@@ -45,7 +45,11 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     respond_to do |format|
-      format.html
+      format.html {
+        if @entry.feed.category.name.downcase == 'movie'
+          redirect_to @entry.source_url
+        end
+      }
       format.html.phone {
         render layout: 'mobile'
       }
