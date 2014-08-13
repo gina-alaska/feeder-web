@@ -30,6 +30,7 @@ template "/etc/init.d/unicorn" do
   action :create
   mode 00755
   variables({
+    pidfile: node[app_name]['unicorn']['pid'],
     install_path: node[app_name]['paths']['deploy'],
     user: node[app_name]['account'],
     unicorn_config_file: node[app_name]['unicorn']['config_path'],
