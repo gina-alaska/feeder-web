@@ -20,3 +20,8 @@ $(document).on 'ready page:load', ->
   $('[data-behavior="time-ago"]').each (index,item) ->
     m = moment($(item).data('date'))
     $(item).html(m.fromNow())
+        
+# $(document).on "page:fetch", ->
+#   console.log 'start'
+# $(document).on "page:receive", ->
+#   console.log 'stop'

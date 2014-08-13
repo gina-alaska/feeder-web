@@ -196,6 +196,7 @@ GEM
     net-ssh-multi (1.1)
       net-ssh (>= 2.1.4)
       net-ssh-gateway (>= 0.99.0)
+    nprogress-rails (0.1.3.1)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -370,6 +371,7 @@ DEPENDENCIES
   minitest (~> 5.0)
   minitest-reporters
   nested_form
+  nprogress-rails
   omniauth
   omniauth-github
   omniauth-google-oauth2

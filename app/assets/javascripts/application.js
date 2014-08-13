@@ -16,5 +16,7 @@
 //= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require moment/moment
 //= require imagesloaded/imagesloaded.pkgd
+//= require nprogress
+//= require nprogress-turbolinks
 //= require turbolinks
 //= require_tree .
