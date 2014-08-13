@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718235541) do
+ActiveRecord::Schema.define(version: 20140813223943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20140718235541) do
     t.integer  "uid",          limit: 8
     t.integer  "highlight_id"
   end
+
+  add_index "entries", ["aasm_state"], name: "index_entries_on_aasm_state", using: :btree
+  add_index "entries", ["feed_id", "aasm_state", "uid"], name: "index_entries_on_feed_id_and_aasm_state_and_uid", using: :btree
+  add_index "entries", ["feed_id", "aasm_state"], name: "index_entries_on_feed_id_and_aasm_state", using: :btree
+  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id", using: :btree
+  add_index "entries", ["uid"], name: "index_entries_on_uid", using: :btree
 
   create_table "feeds", force: true do |t|
     t.string   "slug"
