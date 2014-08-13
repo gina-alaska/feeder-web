@@ -44,11 +44,7 @@ class EntriesController < ApplicationController
   def show
     respond_to do |format|
       format.html.phone {
-        if @entry.feed.category.name.downcase == 'movie'
-          redirect_to @entry.source_url
-        else
-          render layout: 'mobile'
-        end
+        render layout: 'mobile'
       }
       format.html {
       }
