@@ -35,25 +35,7 @@ Rails.application.routes.draw do
     resource :highlights
   end
   
-  # get '/cachetest' => DragonflyCache.endpoint(Dragonfly.app) { |params, app|
-  #   image = Entry.where('preview_uid LIKE ?', "#{params[:id]}%").first.preview
-  #   format = params[:format] || 'jpg'
-  #   size = params[:size] || '500x500'
-  #
-  #   begin
-  #     unless image.image?
-  #       image = app.fetch_file(Rails.root.join("app/assets/images/missing.jpg"))
-  #     end
-  #   rescue
-  #     image = app.fetch_file(Rails.root.join("app/assets/images/missing.jpg"))
-  #   end
-  #
-  #   image = image.encode(format) if image.format.to_s != format
-  #   image = image.thumb(size)
-  #   image
-  # }
-  
-  get '/preview/*id(.:format)' => Dragonfly.app.endpoint { |params, app|
+  get '/preview/*id(.:format)' => DragonflyCache.endpoint(Dragonfly.app) { |params, app|
     image = Entry.where('preview_uid LIKE ?', "#{params[:id]}%").first.preview
     format = params[:format] || 'jpg'
     size = params[:size] || '500x500'
