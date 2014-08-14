@@ -72,4 +72,5 @@ gem "sidekiq"
 gem "aasm"
 gem 'sinatra', require: false
 gem 'browser'
+gem 'quiet_assets'
 
