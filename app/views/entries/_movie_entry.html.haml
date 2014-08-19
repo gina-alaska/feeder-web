@@ -1,2 +1,8 @@
 %video{ autoplay: true, controls: 'controls', poster: entry.preview.url, preload: 'auto' }
   %source{ src: entry.source_url, type: 'video/mp4' }
+  
+:javascript
+  video = document.getElementsByTagName("video")[0];
+  if (!document.webkitFullScreen && video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();    
+  }

@@ -11,6 +11,10 @@
   }
 }
 
+.zoomContainer {
+  z-index: 1001;
+}
+
 .entry-thumb {
   color: #333;
   max-width: 210px;

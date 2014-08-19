@@ -18,5 +18,6 @@
 //= require imagesloaded/imagesloaded.pkgd
 //= require nprogress
 //= require nprogress-turbolinks
+//= require elevatezoom/jquery.elevatezoom
 //= require turbolinks
 //= require_tree .

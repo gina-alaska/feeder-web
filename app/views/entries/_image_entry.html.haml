@@ -1,1 +1,2 @@
-%li.is-loading= image_tag entry.preview.thumb('1600x1600').url
+%li.is-loading
+  = image_tag entry.preview.thumb('600x600').url, id: dom_id(entry, 'image'), data: { behavior: 'zoom', zoom_image: entry.preview.url }
