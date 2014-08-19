@@ -8,10 +8,8 @@ $(document).on 'ready page:load', ->
       #success
       $(image.img).parent().removeClass('is-loading')
       if $(image.img).data('behavior') == 'zoom'
-        $(image.img).elevateZoom({
-          cursor: "crosshair",
-          zoomType  : "lens", lensShape : "square", lensSize : 300
-          # zoomType  : "inner", cursor: "crosshair", zoomWindowFadeIn: 500, zoomWindowFadeOut: 500,
+        $(image.img).parent().zoom({
+          url: $(image.img).data('zoom-image')
         })
     else
       $(image.img).parent().removeClass('is-loading').addClass('is-broken')
