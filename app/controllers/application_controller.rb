@@ -6,6 +6,18 @@ class ApplicationController < ActionController::Base
 
   before_action :set_cors_headers
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+
+  protected
+
+  def set_device_type
+    if browser.mobile? or browser.tablet? or params[:mobile].present?
+      request.variant = :phone
+    end
+  end
+
   def set_cors_headers
     if request.headers["HTTP_ORIGIN"]
       # better way check origin

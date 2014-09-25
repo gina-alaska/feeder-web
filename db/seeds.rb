@@ -10,3 +10,5 @@
   c = Category.where(name: category.humanize).first_or_initialize
   c.save if c.new_record?
 end
+
+HighlightFeed.where(title: 'Highlights').first_or_create

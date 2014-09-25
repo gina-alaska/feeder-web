@@ -25,19 +25,30 @@ unicorn_config node[app_name]['unicorn']['config_path'] do
   after_fork node[app_name]['unicorn']['after_fork']
 end
 
-template "/etc/init.d/unicorn_#{app_name}" do
+template "/etc/init.d/unicorn" do
   source "unicorn_init.erb"
   action :create
   mode 00755
   variables({
+    pidfile: node[app_name]['unicorn']['pid'],
     install_path: node[app_name]['paths']['deploy'],
     user: node[app_name]['account'],
     unicorn_config_file: node[app_name]['unicorn']['config_path'],
     environment: node[app_name]['environment'],
-    ruby_version: node[app_name]['ruby_version']
+    ruby_version: node[app_name]['ruby_version'],
+    redis_url: node[app_name]['redis']['url'],
+    redis_environment: node[app_name]['redis']['environment']
   })
 end
 
-service "unicorn_#{app_name}" do
+service "unicorn" do
   action [:enable]
+end
+
+service "unicorn_#{app_name}" do
+  action [:stop, :disable]
+end
+
+file "/etc/init.d/unicorn_#{app_name}" do
+  action :delete
 end

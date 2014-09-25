@@ -1,0 +1,7 @@
+= bootstrap_form_for(@feed) do |f|
+  = f.alert_message "Please fix the errors below."
+  = f.text_field :title
+  = f.text_area :description, rows: 10
+  = f.collection_select :category_id, Category.all, :id, :name
+  .actions
+    = f.primary

@@ -1,3 +1,132 @@
 // Place all the styles related to the entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel-preview {
+  display: inline-block;
+  max-width: 100%;
+  
+  img {
+    max-width: 100%;
+  }
+}
+
+.zoom {
+  p { position:absolute; top:3px; right:28px; color:#555; font:bold 13px/1 sans-serif;}
+}
+
+.zoom:after {
+	content:'';
+	display:block; 
+	width:33px; 
+	height:33px; 
+	position:absolute; 
+	top:0;
+	right:0;
+	background:url(asset-path('jquery-zoom/icon.png'));
+  
+}
+
+.entry-thumb {
+  color: #333;
+  max-width: 210px;
+  
+  &.thumbnail {
+    margin: 2px 2px 6px 2px;
+  }
+}
+
+.fa.highlight {
+  color: gold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.entry.mobile {
+  text-align: center;
+  position: relative;
+//  top: 50%;
+//  -webkit-transform: translateY(-50%);
+//  -ms-transform: translateY(-50%);
+//  transform: translateY(-50%);
+}
+
+.entry video {
+  max-width: 100%;
+}
+
+.datepicker-inline {
+  margin: 0 auto;
+}
+
+.thumbnail.pull-left {
+  display: inline-block;
+  float: none !important;
+}
+
+.sidebar.affix {
+  position: fixed;
+  top: 10px;
+  width: 300px;
+}
+
+.entry img {
+  background-color: black;
+}
+
+.entry.mobile {
+   height:100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   border: 0;
+   
+   td {
+      vertical-align: middle;
+      text-align: center;
+   }
+}
+
+.image-list {
+  padding:0;
+  margin:0;
+  
+  h4 {
+    font-size: 100%;
+  }
+  
+  li {
+    min-height: 200px;
+    min-width: 200px;
+    display: block;
+    list-style: none;
+    margin: 0;
+    background-color: black;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  li img {
+    -webkit-transition: opacity 0.4s;
+       -moz-transition: opacity 0.4s;
+        -ms-transition: opacity 0.4s;
+            transition: opacity 0.4s;
+  }
+  
+  li.is-loading {
+    background-color: black;
+    background-image: image-url("loading.gif");
+  }
+  
+  li.is-broken {
+    background-color: #be3730;
+    background-image: image-url("broken.png");
+  }
+  
+  li.is-loading img, li.is-broken img {
+    opacity: 0;
+  }
+  
+  li.is-broken {
+    
+  }
+}

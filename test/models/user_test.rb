@@ -15,7 +15,7 @@ describe User do
   end
 
   it 'returns an entry through starred_entries' do
-    user.starred_entries.first.must_equal entries(:one)
+    user.starred_entries.first.must_equal entries(:entry_one)
   end
 
 end

@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+require 'net/http'
+require 'thor'
+
+class PushCommand < Thor
+  include Thor::Actions
+  
+  desc "movie FEED_URL MOVIE_URL", "generate an entry for the given movie"
+  method_option :date, type: :string
+  def movie(feed, url)
+    puts feed
+    puts url
+    
+    date = options[:date]
+    if date.nil?
+      date = ask "Please enter a date for this (YYYY/MM/DD):"
+    end
+    
+    parsed_date = DateTime.parse(date)
+    
+    if parsed_date.nil?
+      say "Failed to parsed entry date"
+      exit 1 
+    end
+    
+    entry_hash = {
+      version: '0.0.1-manual',
+      type: 'create',
+      'payload[data_url]' => url,
+      'payload[event_date]' => parsed_date,
+      'payload[event_url]' => url,
+      'payload[feed_url]' => url
+    }
+    response = Net::HTTP.post_form(URI.parse(feed), entry_hash)
+   
+    if response.message == 'OK'
+      say "Posted entry to #{feed}"
+    else
+      say "Error posting movie"
+      say response.message
+    end
+  end
+end
+
+PushCommand.start

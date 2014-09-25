@@ -1,0 +1,44 @@
+- variant_class ||= 'desktop'
+- unless entries.empty?
+  #slideshow-carousel.carousel.slide{ data: { pause: 'false', interval: 10000, wrap: false }, class: variant_class }
+    %ol.carousel-indicators
+      - entries.count.times do |i|
+        %li{ class: (i==0 ? 'active' : ''), data: { target: '#slideshow-carousel', slide_to: i } }
+    .carousel-inner
+      - entries.each do |entry|
+        .item{ class: (entries.first == entry ? 'active' : '') }
+          - thumb = entry.image.thumb('1280x800>')
+          = image_tag thumb.url, alt: entry.event_at
+          .carousel-caption
+            %h3
+              = entry.feed.title
+              - if entry.highlight.present?
+                %i.fa.fa-star.highlight{ title: entry.highlight.description, data: { behavior: 'tooltip' } }
+                
+            %p
+              = link_to entry do
+                = entry.event_at
+                = "(#{time_ago_in_words(entry.event_at)} ago)"
+    %a.left.carousel-control{ class: (variant_class != 'desktop' ? 'hidden' : ''), href: '#slideshow-carousel', role: "button", data: { slide: "prev" } }
+      %span.glyphicon.glyphicon-chevron-left
+    %a.right.carousel-control{ class: (variant_class != 'desktop' ? 'hidden' : ''), href: '#slideshow-carousel', role: "button", data: { slide: "next" } }
+      %span.glyphicon.glyphicon-chevron-right
+  :javascript
+    $(document).ready(function() {
+      $("#slideshow-carousel").carousel();
+    });
+    $(document).on('slide.bs.carousel', function(e) {
+      if (e.direction != 'left') {
+        // don't do anything when sliding back
+        return;
+      }
+      if ($(this).find('.item:last').hasClass('active')) {
+      
+        Turbolinks.visit(location.path);
+      }
+    });
+    $(document).one('page:fetch', function() {
+      // disable previous slideshow instance
+      $(document).off('slide.bs.carousel');
+      $("#slideshow-carousel").remove();
+    })

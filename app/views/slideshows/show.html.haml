@@ -1,0 +1,61 @@
+.row
+  .col-lg-8.col-md-8.col-sm-8
+    %h1
+      = @slideshow
+      slideshow
+    .lead
+      %p
+        Your slideshow code is:
+        %div.text-center
+          %b.text-info{ style: 'font-size: 3em;' }= @slideshow.uid.upcase
+      %p
+        Enter the above code into the
+        %b Puffin Feeder Slideshow
+        application to access the imagery feeds
+
+
+    %h3 Slideshow Preview
+    = render 'carousel', entries: @entries
+
+  .col-lg-4.col-md-4.col-sm-4
+    .panel.panel-default
+      .panel-heading
+        .panel-title Information
+      .panel-body
+        %dl.dl-horizontal
+          %dt Only shows highlights?
+          %dd= @slideshow.highlights_only? ? 'Yes' : 'No'
+
+        .row
+          .col-lg-6.col-md-6.col-sm-6
+            = link_to carousel_slideshow_path(@slideshow), class: 'btn btn-primary btn-block' do
+              %i.fa.fa-eye
+              View
+          .col-lg-6.col-md-6.col-sm-6
+            = link_to edit_slideshow_path(@slideshow), class: 'btn btn-default btn-block' do
+              %i.fa.fa-gears
+              Change Settings
+      %ul.list-group
+        %li.list-group-item Feeds:
+        - @active_feeds.each do |feed|
+          - next if feed.entries.available.empty?
+          %li.list-group-item.clearfix
+            .pull-left
+              = link_to [feed, :entries], target: :_blank do
+                = image_tag feed.preview_entry.image.thumb('50x50#').url, style: 'margin-right: 10px;'
+            %b= link_to feed, [feed,:entries], target: :_blank
+            - if can? :manage, @slideshow
+              %br/
+              = link_to [:remove, feed, @slideshow], remote: true, class: 'btn btn-danger' do
+                Remove from slideshow
+        - if can? :manage, @slideshow
+          - @available_feeds.each do |feed|
+            - next if feed.class == HighlightFeed or feed.preview_entry.nil?
+            %li.list-group-item.clearfix
+              .pull-left
+                = link_to [feed, :entries], target: :_blank do
+                  = image_tag feed.preview_entry.image.thumb('50x50#').url, style: 'margin-right: 10px;'
+              %b= link_to feed, [feed, :entries], target: :_blank
+              %br/
+              = link_to [:add, feed, @slideshow], remote: true, class: 'btn btn-success' do
+                Add to slideshow

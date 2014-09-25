@@ -3,7 +3,7 @@ default['unicorn_config_path'] = '/etc/unicorn'
 default['feeder-web']['account'] = "webdev"
 default['feeder-web']['environment'] = "production"
 default['feeder-web']['packages'] = %w{
-  ImageMagick-devel
+  ImageMagick-devel gina-ffmpeg
 }
 
 #Path configuration
@@ -28,7 +28,18 @@ default['feeder-web']['databases']['development'] = {
 }
 
 #Rails configuration
-default['feeder-web']['secrets']['secret_key_base'] = 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
+default['feeder-web']['secrets'] = {
+  development: {
+    secret_key_base: 'b4b8fefeb6fc52226802bf3e293b250733b73d82388822a32d477a04ba4ce956dc251e656b3182ae8b21dbedce3c7d406488d12d2f4d4eaf4db40e115de3c675'
+  },
+  test: {
+    secret_key_base: 'd3748ac9c5d967eda97ecf887839dc874eaaee58aa183b2404296ee2b4011a16272c9e18e63bdc803d62b76a9cd1c7e751115498b9cfd9ffcd797840f142190c'
+  },
+  production: {
+    secret_key_base: 'c1d3aea4438813ac33752bfe243599e53fe88ecd1b885bc5f218fc6c4d04b9324b0f4b846ab9c2a280b58aef3543352bce5609549557e09d321c38328bfa162b'
+  }
+}
+
 default['feeder-web']['rails']['application_class_name'] = ''
 default['feeder-web']['rails']['default_urls'] = {
   development: 'localhost'
@@ -69,6 +80,11 @@ defined?(ActiveRecord::Base) and
   '
 }
 
+#Redis
+default['feeder-web']['redis']['url'] = "redis://localhost:6379/12"
+default['feeder-web']['redis']['environment'] = "feeder_production"
+
+
 #Sidekiq Configuration
 default['feeder-web']['sidekiq']['action'] = [:enable]
 default['feeder-web']['sidekiq']['pidfile'] = 'tmp/pids/sidekiq.pid'
@@ -78,6 +94,7 @@ default['feeder-web']['sidekiq']['environments'] = {
     'concurrency' => 2
   }
 }
+
 
 #Mounts
 default['feeder-web']['mounts'] = {

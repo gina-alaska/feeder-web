@@ -1,0 +1,5 @@
+- if entry.feed.category.name == 'Movie'
+  = render 'movie_entry', entry: entry
+- else
+  = link_to entry.preview.url, target: :_blank do
+    = render "image_entry", entry: entry

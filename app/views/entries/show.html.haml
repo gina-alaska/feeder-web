@@ -1,0 +1,20 @@
+.text-center
+  .entry.panel.panel-default.panel-preview
+    .panel-heading.navbar.navbar-default.navbar-static-top{ style: 'margin-bottom: 0; padding: 1px;' }
+      .container-fluid
+        .navbar-brand
+          - if @entry.highlight.nil?
+            = link_to_if signed_in?, '<i class="fa fa-star-o"></i>'.html_safe, new_entry_highlights_path(@entry)
+          - else
+            = link_to_if signed_in?, "<i class=\"fa fa-star highlight\" title=\"#{@entry.highlight}\" data-behavior=\"tooltip\"></i>".html_safe, entry_highlights_path(@entry)
+
+
+          = link_to @entry.feed, [@entry.feed, :entries]
+          = " - #{@entry.event_at}"
+
+        = link_to @entry.source_url, target: :_blank, class: 'btn btn-primary navbar-btn navbar-right' do
+          %i.fa.fa-download
+          Download
+
+    .panel-body.image-list.text-center{ style: 'padding:0;' }
+      = render "full_entry", entry: @entry

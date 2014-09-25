@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feed: barrow_webcam
+  slideshow: barrow
+
+two:
+  feed: barrow_radar
+  slideshow: barrow

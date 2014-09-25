@@ -1,0 +1,5 @@
+%h1.text-center Choose a feed
+%div.text-center.image-list
+  - @feeds.each do |feed|
+    - next if feed.entries.recent.empty?
+    = render 'entry', feed: feed

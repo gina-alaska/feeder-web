@@ -5,4 +5,8 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, allow_blank: false
 
   has_many :feeds
+  
+  def to_s
+    name
+  end
 end

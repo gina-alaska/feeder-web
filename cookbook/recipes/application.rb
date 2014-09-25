@@ -1,6 +1,7 @@
 app_name = "feeder-web"
 
 include_recipe "feeder-web::packages"
+include_recipe "feeder-web::ffmpeg_delegates_fix"
 include_recipe "feeder-web::ruby"
 include_recipe "postgresql::client"
 
@@ -55,7 +56,6 @@ template "#{node[app_name]['paths']['shared']}/config/secrets.yml" do
   group account
   mode 00644
   variables({
-    environment: node[app_name]['environment'],
     secrets: node[app_name]['secrets']
   })
 end

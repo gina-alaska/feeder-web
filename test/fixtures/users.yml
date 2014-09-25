@@ -9,3 +9,10 @@ two:
   name: MyString
   email: MyString
   avatar: MyString
+
+admin:
+  name: Admin
+  email: admin@gina.alaska.edu
+  avatar: none
+  admin: true
+  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624010051) do
+ActiveRecord::Schema.define(version: 20140813223943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,14 @@ ActiveRecord::Schema.define(version: 20140624010051) do
     t.string   "slug"
     t.string   "aasm_state"
     t.integer  "uid",          limit: 8
+    t.integer  "highlight_id"
   end
+
+  add_index "entries", ["aasm_state"], name: "index_entries_on_aasm_state", using: :btree
+  add_index "entries", ["feed_id", "aasm_state", "uid"], name: "index_entries_on_feed_id_and_aasm_state_and_uid", using: :btree
+  add_index "entries", ["feed_id", "aasm_state"], name: "index_entries_on_feed_id_and_aasm_state", using: :btree
+  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id", using: :btree
+  add_index "entries", ["uid"], name: "index_entries_on_uid", using: :btree
 
   create_table "feeds", force: true do |t|
     t.string   "slug"
@@ -60,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140624010051) do
     t.integer  "category_id"
     t.boolean  "mobile_compatible", default: true
     t.string   "more_info_url"
+    t.string   "type"
   end
 
   add_index "feeds", ["slug"], name: "index_feeds_on_slug", unique: true, using: :btree
@@ -77,11 +85,33 @@ ActiveRecord::Schema.define(version: 20140624010051) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "highlights", force: true do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "memberships", force: true do |t|
     t.integer  "user_id"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "slideshow_feeds", force: true do |t|
+    t.integer  "feed_id"
+    t.integer  "slideshow_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "slideshows", force: true do |t|
+    t.string   "title"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "highlights_only", default: false
   end
 
   create_table "stars", force: true do |t|
@@ -97,6 +127,7 @@ ActiveRecord::Schema.define(version: 20140624010051) do
     t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
 end
